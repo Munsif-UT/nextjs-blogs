@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import inventooly from "../public/frontend/media/logo_final-svg.png";
 import axios from "axios";
+import Link from "next/link";
 // import twitter from "../../assets/icons/5296516_tweet_twitter_twitter logo_icon.svg";
 // import facebook from "../../assets/icons/5365678_fb_facebook_facebook logo_icon.svg";
 // import linkedin from "../../assets/icons/5296501_linkedin_network_linkedin logo_icon.svg";
@@ -246,9 +247,9 @@ function Footer() {
                       }}
                     >
                       <ArrowRight />
-                      <a href="#top" style={{ color: "#013298" }}>
-                        Home
-                      </a>
+                      <Link href="/#top">
+                        <a style={{ color: "#013298" }}>Home</a>
+                      </Link>
                     </li>
                     <li
                       style={{
@@ -258,10 +259,11 @@ function Footer() {
                       }}
                     >
                       <ArrowRight />
-                      <a href="#About" style={{ color: "#013298" }}>
-                        About Us
-                      </a>
+                      <Link href="/#About">
+                        <a style={{ color: "#013298" }}>About Us</a>
+                      </Link>
                     </li>
+
                     <li
                       style={{
                         padding: "10px 0",
@@ -270,9 +272,9 @@ function Footer() {
                       }}
                     >
                       <ArrowRight />
-                      <a href="/terms-of-service" style={{ color: "#013298" }}>
-                        Terms of service
-                      </a>
+                      <Link href="/terms-of-service">
+                        <a style={{ color: "#013298" }}>Terms of service</a>
+                      </Link>
                     </li>
                     <li
                       style={{

@@ -85,7 +85,21 @@ const FrontFeatures = () => {
         style={{ backgroundColor: "white" }}
       >
         <div className="col-md-7 offset-md-3 text-align: center">
-          <div className="mainHeadingSmall">Features</div>
+          <div
+            className="mainHeadingSmall"
+            style={{
+              marginBottom: "10px",
+              textAlign: "center",
+              fontSize: "15px",
+              letterSpacing: "2px",
+              fontWeight: "700",
+              margin: "0",
+              color: "#4154f1",
+              textTransform: "uppercase",
+            }}
+          >
+            Features
+          </div>
           <p
             style={{
               color: "#072371",
@@ -188,7 +202,7 @@ const FrontFeatures = () => {
           </div>
           <div className="col" style={{ marginTop: "40px" }}>
             <div className="card h-100" style={{ borderRadius: "10px" }}>
-              <div className="inner" style={{}}>
+              <div className="inner">
                 <Image
                   style={{ height: "100%", width: "100%", padding: "20px" }}
                   src={feature4}
@@ -554,7 +568,7 @@ const FrontFeatures = () => {
                     height: "100%",
                   }}
                 >
-                  <img src={blogs1} alt="" />
+                  <Image src={blogs1} alt="" />
                   <div
                     className="img-overlay blogOverlay"
                     style={{
@@ -573,7 +587,7 @@ const FrontFeatures = () => {
                         marginBottom: "10px",
                       }}
                     >
-                      Mon, Jan 15
+                      Mon,Jan 15
                     </span>
                     <p
                       className="blogPara"

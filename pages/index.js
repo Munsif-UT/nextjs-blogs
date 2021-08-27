@@ -32,7 +32,7 @@ import img1 from "../public/web-banner-urtasker-1.jpg";
 import img2 from "../public/web-banner-urtasker-2.jpg";
 import img3 from "../public/web-banner-urtasker-3.jpg";
 import urtasker from "../public/urtasker.svg";
-import blogs1 from "../public/frontend/media/blogs1.jpg";
+
 import blogs2 from "../public/frontend/media/blogs1.jpg";
 import blogs3 from "../public/frontend/media/blogs1.jpg";
 // import logo_final_svg from "../assets/frontend/media/logo_final-svg.png";
@@ -44,6 +44,8 @@ import footer_bg3 from "../public/frontend/media/footer-bg3.png";
 // import chatbot from "../../component/chatbot/chatbot";
 import NavigationPreloadManager from "../components/NavbarInventoolyWebsite";
 import Footer from "../components/Footer";
+import BlogsForHome from "../components/BlogsForHome";
+import blogsData from "./../data/blogsData";
 
 const isValidEmail = (email) => {
   const re =
@@ -51,6 +53,8 @@ const isValidEmail = (email) => {
   return re.test(email);
 };
 const Home = () => {
+  const blogsDataCopy = blogsData.map((blog) => blog);
+  blogsDataCopy.length = 3; //to get only first 3 values of array
   //navbar scroll when active state
   const history = useHistory();
   // const dispatch = useDispatch();
@@ -614,7 +618,7 @@ const Home = () => {
                 </h2>
               </div>
               <div className="col-md-6 text-center content-vertical">
-                <Image src={process} style={{ width: "70%" }} alt="" />
+                <Image style={{ width: "70%" }} src={process} alt="" />
               </div>
             </div>
           </div>
@@ -1021,7 +1025,6 @@ const Home = () => {
                       Deep insights on forecasting helps me making informed
                       decision.
                     </p>
-                    {/* <a href="#" class="btn  btn-lg btnMain">Go somewhere</a> */}
                   </div>
                 </div>
               </div>
@@ -1035,7 +1038,6 @@ const Home = () => {
             padding: "60px 0px",
             overflow: "hidden",
             textAlign: "center",
-            display: "none",
           }}
         >
           <div className="col-md-6 offset-md-3 text-align: center">
@@ -1068,176 +1070,15 @@ const Home = () => {
           </div>
           <div className="container">
             <div className="row rowHeight">
-              <div className="col-md-4 ">
-                <div
-                  className="card cardHeight"
-                  style={{
-                    padding: "4px",
-                    textAlign: "center",
-                    width: "100%",
-                    borderRadius: "5px",
-                    boxShadow: "0px 0 5px rgb(1 41 112 / 8%)",
-                    border: "none ",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                  }}
-                >
-                  <Image src={blogs1} alt="" />
-                  <div
-                    className="Image-overlay blogOverlay"
-                    style={{
-                      textAlign: "left",
-                      marginBottom: "40px",
-                      padding: "20px 20px 0px 20px",
-                    }}
-                  >
-                    <span
-                      className="blogDate"
-                      style={{
-                        fontSize: "16px",
-                        fontWeight: "600",
-                        color: "rgba(1, 41, 112, 0.6)",
-                        display: "block",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      Mon, Jan 15
-                    </span>
-                    <p
-                      className="blogPara"
-                      style={{
-                        bottom: "0",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      Quo esse repellendus quia id. Est eum et accusantium
-                      pariatur fugit nihil minima suscipit corporis
-                    </p>
-                    <a
-                      style={{
-                        position: "absolute",
-                        bottom: "0",
-                        marginBottom: "10px",
-                      }}
-                      href="##"
-                      className="blogReadmore readMorePositionFixed stretched-link "
-                    >
-                      Read More
-                      <ArrowRight />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div
-                  className="card  cardHeight"
-                  style={{
-                    padding: "4px",
-                    textAlign: "center",
-                    width: "100%",
-                    borderRadius: "5px",
-                    boxShadow: "0px 0 5px rgb(1 41 112 / 8%)",
-                    border: "none ",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                  }}
-                >
-                  <Image src={blogs2} alt="" />
-                  <div
-                    className="Image-overlay blogOverlay"
-                    style={{
-                      textAlign: "left",
-                      marginBottom: "40px",
-                      padding: "20px 20px 0px 20px",
-                    }}
-                  >
-                    <span
-                      className="blogDate"
-                      style={{
-                        fontSize: "16px",
-                        fontWeight: "600",
-                        color: "rgba(1, 41, 112, 0.6)",
-                        display: "block",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      Mon, Jan 15
-                    </span>
-                    <p className="blogPara">
-                      Quo esse repellendus quia id. Est eum et accusantium
-                      pariatur fugit nihil minima suscipit corporis.
-                    </p>
-                    <a
-                      style={{
-                        position: "absolute",
-                        bottom: "0",
-                        marginBottom: "10px",
-                      }}
-                      href="###"
-                      className="blogReadmore readMorePositionFixed stretched-link mt-auto"
-                    >
-                      Read More
-                      <ArrowRight />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div
-                  className="card cardHeight"
-                  style={{
-                    padding: "4px",
-                    textAlign: "center",
-                    width: "100%",
-                    borderRadius: "5px",
-                    boxShadow: "0px 0 5px rgb(1 41 112 / 8%)",
-                    border: "none ",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                  }}
-                >
-                  <Image src={blogs3} alt="" />
-                  <div
-                    className="Image-overlay blogOverlay"
-                    style={{
-                      textAlign: "left",
-                      marginBottom: "40px",
-                      padding: "20px 20px 0px 20px",
-                    }}
-                  >
-                    <span
-                      className="blogDate"
-                      style={{
-                        fontSize: "16px",
-                        fontWeight: "600",
-                        color: "rgba(1, 41, 112, 0.6)",
-                        display: "block",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      Mon, Jan 15
-                    </span>
-                    <p className="blogPara">
-                      Quo esse repellendus quia id. A suscipit corporis
-                    </p>
-                    <a
-                      style={{
-                        position: "absolute",
-                        bottom: "0",
-                        marginBottom: "10px",
-                      }}
-                      href="##"
-                      className="blogReadmore readMorePositionFixed stretched-link mt-auto"
-                    >
-                      Read More
-                      <ArrowRight />
-                    </a>
-                  </div>
-                </div>
-              </div>
+              {blogsDataCopy.map((blog) => (
+                <BlogsForHome
+                  key={blog.blogNo}
+                  date={blog.date}
+                  title={blog.title}
+                  blogNo={blog.blogNo}
+                  image={blog.image}
+                />
+              ))}
             </div>
           </div>
         </section>

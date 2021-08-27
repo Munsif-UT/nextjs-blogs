@@ -1,0 +1,249 @@
+import React, { useState, useEffect } from "react";
+import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
+import { Form as FormAntd, Button } from "antd";
+import { useRouter } from "next/router";
+// import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import blogs from "../../public/frontend/media/logo_final-svg.png";
+import Image from "next/image";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import Link from "next/link";
+
+// const isValidEmail = (email) => {
+//   const re =
+//     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//   return re.test(email);
+// };
+import axios from "axios";
+function Signin() {
+  const [togglePassword, setTogglePassword] = useState(true);
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+
+  const submitData = async () => {
+    const { data } = await axios.post("/api/bloggerauth", {
+      email,
+      password: pass,
+    });
+    alert(data.message);
+  };
+  return (
+    <div
+      className="main_signup_page"
+      style={{
+        background: `url("/frontend/media/bgImg.png")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+      }}
+    >
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div
+              className="div"
+              style={{ marginTop: "10px", marginBottom: "10px" }}
+            >
+              {/* <button
+                onClick={() => {
+                  router.push("/");
+                }}
+                style={{
+                  margin: "10px",
+                  float: "right",
+                  padding: "5px 19px",
+                  background: "white",
+                  outline: "none",
+                  color: "black",
+                  borderRadius: "4px",
+                  fontSize: "18px",
+                  letterSpacing: "1px",
+                  transition: "1s",
+                  border: "2px solid white",
+                  marginBottom: "20px",
+                  boxShadow: "rgb(65 84 241 / 40%) 0px 5px 30px",
+                  fontFamily: "Nunito, sans-serif",
+                }}
+              >
+                Back To Home
+              </button> */}
+              <Link href="/">
+                <a
+                  style={{
+                    margin: "10px",
+                    float: "right",
+                    padding: "5px 19px",
+                    background: "white",
+                    outline: "none",
+                    color: "black",
+                    borderRadius: "4px",
+                    fontSize: "18px",
+                    letterSpacing: "1px",
+                    transition: "1s",
+                    border: "2px solid white",
+                    marginBottom: "20px",
+                    boxShadow: "rgb(65 84 241 / 40%) 0px 5px 30px",
+                    fontFamily: "Nunito, sans-serif",
+                    textDecoration: "none",
+                  }}
+                >
+                  Home
+                </a>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pg__signup">
+        <div className="container">
+          <div className="row">
+            <div
+              className="content__wrapper col-md-11 col-lg-7 col-xs-12 col-sm-12"
+              style={{ background: "white", margin: "0 auto" }}
+            >
+              <div className="row">
+                <div
+                  className="content__wrapper_right col-sm-12 col-md-12 col-lg-12 col-xs-12"
+                  style={{ padding: "40px" }}
+                >
+                  <div
+                    className="content__wrapper_right__form__wrapper"
+                    style={{ width: "100%" }}
+                  >
+                    <div
+                      className="logo__signup__page"
+                      style={{ textAlign: "center" }}
+                    >
+                      <a
+                        className="navbar-brand navigationBrand"
+                        href="/home"
+                        style={{
+                          fontWeight: "700",
+                          letterSpacing: "1px",
+                          color: "#012970 ",
+                          fontFamily: "Nunito, sans-serif",
+                          marginTop: "3px",
+                          fontSize: "40px",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <Image
+                          src={blogs}
+                          style={{
+                            marginRight: "6px",
+                            marginTop: "5px",
+                            height: "50px",
+                            width: "50px",
+                          }}
+                          alt=""
+                          width={30}
+                          height={30}
+                          className="d-inline-block align-text-top"
+                        />
+                        Inventooly
+                      </a>
+                    </div>
+                    <div className="heading__signup">
+                      <p
+                        style={{
+                          marginTop: "0",
+                          marginBottom: "10px",
+                          fontSize: "26px",
+                          fontWeight: "bold",
+                          color: "rgb(1, 41, 112)",
+                        }}
+                      >
+                        Sign In
+                      </p>
+                    </div>
+                    <div style={{ width: "100%" }}>
+                      <div className="from__wrapper_email">
+                        <FormAntd.Item
+                          hasFeedback
+                          style={{ marginBottom: "0px" }}
+                        >
+                          <input
+                            className="comon_input"
+                            type="text"
+                            autoComplete="none"
+                            name="email"
+                            id="email"
+                            placeholder="Email*"
+                            value={email}
+                            onChange={(e) => {
+                              setEmail(e.target.value);
+                            }}
+                          />
+                          <div
+                            className="signin__Logo"
+                            style={{ cursor: "pointer" }}
+                          >
+                            <AlternateEmailIcon />
+                          </div>
+                          {/* {!errors?.email && (
+                            <div className="register__Logo">
+                              <AlternateEmailIcon />
+                            </div>
+                          )} */}
+                        </FormAntd.Item>
+                      </div>
+                      <div className="from__wrapper_pass">
+                        <FormAntd.Item
+                          hasFeedback
+                          style={{ marginBottom: "0px" }}
+                        >
+                          <input
+                            className="comon_input"
+                            type={togglePassword ? "password" : "text"}
+                            name="password"
+                            id="password"
+                            placeholder="Password"
+                            value={pass}
+                            onChange={(e) => {
+                              setPass(e.target.value);
+                            }}
+                            autoComplete="off"
+                          />
+                          <div
+                            className="signin__Logo"
+                            style={{ cursor: "pointer" }}
+                          >
+                            {togglePassword ? (
+                              <VisibilityOffIcon
+                                onClick={() => setTogglePassword(false)}
+                              />
+                            ) : (
+                              <VisibilityIcon
+                                onClick={() => setTogglePassword(true)}
+                              />
+                            )}
+                          </div>
+                          {/* {!errors?.phone && (
+                            <div className="register__Logo">
+                              <DialpadIcon />
+                            </div>
+                          )} */}
+                        </FormAntd.Item>
+                      </div>
+                      <div
+                        className="form__wrapper__sunmitButton"
+                        style={{ textAlign: "center" }}
+                      >
+                        <Button id="submit" onClick={submitData}>
+                          Login
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Signin;

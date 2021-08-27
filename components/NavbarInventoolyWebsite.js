@@ -5,7 +5,7 @@ import { List } from "react-bootstrap-icons";
 // import blogs from "../public/frontend/media/logo_final-svg.png";
 import { useHistory } from "react-router-dom";
 import Image from "next/image";
-import { Link } from "next/link";
+import Link from "next/link";
 function NavbarInventoolyWebsite() {
   const history = useHistory();
   const [navbarcollapse, setNavbarcollapse] = useState(false);
@@ -40,29 +40,30 @@ function NavbarInventoolyWebsite() {
       }`}
     >
       <div className="container">
-        <a
-          className="navbar-brand navigationBrand"
-          href="/"
-          style={{
-            fontSize: "30px ",
-            fontWeight: "700",
-            letterSpacing: "1px",
-            color: "#012970 ",
-            fontFamily: "Nunito, sans-serif",
-            marginTop: "0px",
-            padding: "0px",
-          }}
-        >
-          <img
-            src="/frontend/media/logo_final-svg.png"
-            style={{ marginRight: "6px", marginTop: "5px" }}
-            alt=""
-            width={30}
-            height={30}
-            className="d-inline-block align-text-top"
-          />
-          Inventooly
-        </a>
+        <Link href="/">
+          <a
+            className="navbar-brand navigationBrand"
+            style={{
+              fontSize: "30px ",
+              fontWeight: "700",
+              letterSpacing: "1px",
+              color: "#012970 ",
+              fontFamily: "Nunito, sans-serif",
+              marginTop: "0px",
+              padding: "0px",
+            }}
+          >
+            <img
+              src="/frontend/media/logo_final-svg.png"
+              style={{ marginRight: "6px", marginTop: "5px" }}
+              alt=""
+              width={30}
+              height={30}
+              className="d-inline-block align-text-top"
+            />
+            Inventooly
+          </a>
+        </Link>
         <button
           className="navbar-toggler"
           style={{ border: "2px solid #012970" }}
@@ -100,93 +101,97 @@ function NavbarInventoolyWebsite() {
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <a
-                  className="nav-link"
-                  href="/features"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "10px 0 10px 0px",
-                    fontFamily: "Nunito, sans-serif",
-                    fontSize: "16px",
-                    fontWeight: "700",
-                    color: "#013298",
-                    whiteSpace: "nowrap",
-                    transition: "0.3s",
-                  }}
-                >
-                  Features
-                </a>
+                <Link href="/features">
+                  <a
+                    className="nav-link"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "10px 0 10px 0px",
+                      fontFamily: "Nunito, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "700",
+                      color: "#013298",
+                      whiteSpace: "nowrap",
+                      transition: "0.3s",
+                    }}
+                  >
+                    Features
+                  </a>
+                </Link>
               </li>
               <li
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <a
-                  className="nav-link"
-                  href="#Pricing"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "10px 0 10px 0px",
-                    fontFamily: "Nunito, sans-serif",
-                    fontSize: "16px",
-                    fontWeight: "700",
-                    color: "#013298",
-                    whiteSpace: "nowrap",
-                    transition: "0.3s",
-                  }}
-                >
-                  Pricing
-                </a>
+                <Link href="#Pricing">
+                  <a
+                    className="nav-link"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "10px 0 10px 0px",
+                      fontFamily: "Nunito, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "700",
+                      color: "#013298",
+                      whiteSpace: "nowrap",
+                      transition: "0.3s",
+                    }}
+                  >
+                    Pricing
+                  </a>
+                </Link>
               </li>
               <li
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <a
-                  className="nav-link"
-                  href="#Contact"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "10px 0 10px 0px",
-                    fontFamily: "Nunito, sans-serif",
-                    fontSize: "16px",
-                    fontWeight: "700",
-                    color: "#013298",
-                    whiteSpace: "nowrap",
-                    transition: "0.3s",
-                  }}
-                >
-                  Contact
-                </a>
+                <Link href="#Contact">
+                  <a
+                    className="nav-link"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "10px 0 10px 0px",
+                      fontFamily: "Nunito, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "700",
+                      color: "#013298",
+                      whiteSpace: "nowrap",
+                      transition: "0.3s",
+                    }}
+                  >
+                    Contact
+                  </a>
+                </Link>
               </li>
               <li
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <a
-                  className="nav-link"
-                  href="/blogs"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "10px 0 10px 0px",
-                    fontFamily: "Nunito, sans-serif",
-                    fontSize: "16px",
-                    fontWeight: "700",
-                    color: "#013298",
-                    whiteSpace: "nowrap",
-                    transition: "0.3s",
-                  }}
-                >
-                  Blog
-                </a>
+                <Link href="/blogs">
+                  <a
+                    className="nav-link"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "10px 0 10px 0px",
+                      fontFamily: "Nunito, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "700",
+                      color: "#013298",
+                      whiteSpace: "nowrap",
+                      transition: "0.3s",
+                    }}
+                  >
+                    Blog
+                  </a>
+                </Link>
               </li>
             </div>
 
@@ -195,84 +200,88 @@ function NavbarInventoolyWebsite() {
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <a
-                  className="nav-link"
-                  href={"/signin"}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "10px 0 10px 0px",
-                    fontFamily: "Nunito, sans-serif",
-                    fontSize: "16px",
-                    fontWeight: "700",
-                    color: "#013298",
-                    whiteSpace: "nowrap",
-                    transition: "0.3s",
-                  }}
-                >
-                  Login
-                </a>
+                <Link href="/signin">
+                  <a
+                    className="nav-link"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "10px 0 10px 0px",
+                      fontFamily: "Nunito, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "700",
+                      color: "#013298",
+                      whiteSpace: "nowrap",
+                      transition: "0.3s",
+                    }}
+                  >
+                    Login
+                  </a>
+                </Link>
               </li>
               <li
                 className="nav-item li-Nav"
                 style={{ alignItems: "right", paddingLeft: "15px" }}
               >
-                <a
-                  href="-"
-                  className="nav-link"
-                  onClick={() => {
-                    history.push("/onboard");
-                  }}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    fontFamily: "Nunito, sans-serif",
-                    fontWeight: "400",
-                    whiteSpace: "nowrap",
-                    transition: "0.3s",
-                    color: "#fff",
-                    backgroundColor: "#4154f1",
-                    // padding: "10px 0 10px 0px",
-                    fontSize: "1rem",
-                    borderRadius: ".25rem",
-                    paddingLeft: "20px",
-                    paddingRight: "20px",
-                  }}
-                >
-                  Get Started For Free
-                </a>
+                <Link href="/onboard">
+                  <a
+                    className="nav-link"
+                    onClick={() => {
+                      history.push("/onboard");
+                    }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      fontFamily: "Nunito, sans-serif",
+                      fontWeight: "400",
+                      whiteSpace: "nowrap",
+                      transition: "0.3s",
+                      color: "#fff",
+                      backgroundColor: "#4154f1",
+                      // padding: "10px 0 10px 0px",
+                      fontSize: "1rem",
+                      borderRadius: ".25rem",
+                      paddingLeft: "20px",
+                      paddingRight: "20px",
+                    }}
+                  >
+                    Get Started For Free
+                  </a>
+                </Link>
               </li>
               <li
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <a
-                  className="nav-link"
-                  href={"/signin?demo=true"}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    fontFamily: "Nunito, sans-serif",
-                    whiteSpace: "nowrap",
-                    transition: "0.3s",
-                    color: "#4154f1",
-                    backgroundColor: "#fff",
-                    // padding: "10px 0 10px 0px",
-                    fontSize: "1rem",
-                    borderRadius: ".25rem",
-                    paddingLeft: "20px",
-                    paddingRight: "20px",
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                    border: "2px solid #4154f1",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Demo
-                </a>
+                <Link href={"/signin?demo=true"}>
+                  <a
+                    className="nav-link"
+                    href={"/signin?demo=true"}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      fontFamily: "Nunito, sans-serif",
+                      whiteSpace: "nowrap",
+                      transition: "0.3s",
+                      color: "#4154f1",
+                      backgroundColor: "#fff",
+                      // padding: "10px 0 10px 0px",
+                      fontSize: "1rem",
+                      borderRadius: ".25rem",
+                      paddingLeft: "20px",
+                      paddingRight: "20px",
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                      border: "2px solid #4154f1",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Demo
+                  </a>
+                </Link>
               </li>
             </div>
           </ul>
