@@ -17,8 +17,7 @@ const blogsData = [
     blogNo: 2,
     date: new Date().toLocaleDateString(),
     image: "",
-    title:
-      "Urtasker ipsam,dolores sapiente quam eligendi debitis aperiam eveniet",
+    title: "Urtasker ipsam,dolores sapiente quam eligendi debitis ",
     userName: "Inventoly",
     chat: 1,
     comments: 1,

@@ -1,4 +1,3 @@
-import { Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import { Box } from "@material-ui/core";
@@ -11,6 +10,10 @@ import Image from "next/image";
 // import "./index.css";
 import { Form, Input, InputNumber, Button } from "antd";
 import NavbarInventoolyWebsite from "./../../components/NavbarInventoolyWebsite";
+import { Upload, message } from "antd";
+import { InboxOutlined } from "@ant-design/icons";
+
+const { Dragger } = Upload;
 const layout = {
   labelCol: {
     span: 8,
@@ -20,7 +23,7 @@ const layout = {
   },
 };
 
-function getBase64(img, callback) {
+/* function getBase64(img, callback) {
   const reader = new FileReader();
   reader.addEventListener("load", () => callback(reader.result));
   reader.readAsDataURL(img);
@@ -35,34 +38,39 @@ function beforeUpload(file) {
     message.error("Image must smaller than 2MB!");
   }
   return isJpgOrPng && isLt2M;
-}
+} */
 const validateMessages = {
   required: "${label} is required!",
   number: {
     range: "${label} must be between ${min} and ${max}",
   },
 };
+const props = {
+  name: "file",
+  multiple: true,
+  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  onChange(info) {
+    const { status } = info.file;
+    if (status !== "uploading") {
+      console.log(info.file, info.fileList);
+    }
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+  onDrop(e) {
+    console.log("Dropped files", e.dataTransfer.files);
+  },
+};
 function Avatar() {
+  const [name, setname] = useState("");
+  const [titile, settitile] = useState("");
   const [ckeditorContent, setCkeditorContent] = useState("");
   const [imageStatus, setImageStatus] = useState({
     loading: false,
   });
-
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setImageStatus(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (imageUrl) =>
-        setImageStatus({
-          imageUrl,
-          loading: false,
-        })
-      );
-    }
-  };
 
   const { loading, imageUrl } = imageStatus;
   const uploadButton = (
@@ -71,7 +79,6 @@ function Avatar() {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
-  console.log(imageUrl);
   const onFinish = (values) => {
     console.log(values);
   };
@@ -115,25 +122,19 @@ function Avatar() {
                         },
                       ]}
                     >
-                      <Upload
-                        name="avatar"
-                        listType="picture-card"
-                        className="avatar-uploader"
-                        showUploadList={false}
-                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                        beforeUpload={beforeUpload}
-                        onChange={handleChange}
-                      >
-                        {imageUrl ? (
-                          <Image
-                            src={imageUrl}
-                            alt="avatar"
-                            style={{ width: "100%" }}
-                          />
-                        ) : (
-                          uploadButton
-                        )}
-                      </Upload>
+                      <Dragger {...props}>
+                        <p className="ant-upload-drag-icon">
+                          <InboxOutlined />
+                        </p>
+                        <p className="ant-upload-text">
+                          Click or drag file to this area to upload
+                        </p>
+                        <p className="ant-upload-hint">
+                          Support for a single or bulk upload. Strictly prohibit
+                          from uploading company data or other band files
+                        </p>
+                      </Dragger>
+                      ,
                     </Form.Item>
                     <Form.Item
                       name={["blog", "authername"]}
@@ -143,6 +144,7 @@ function Avatar() {
                           required: true,
                         },
                       ]}
+                      onChange={(e) => setname(e.target.value)}
                     >
                       <Input />
                     </Form.Item>
@@ -154,6 +156,7 @@ function Avatar() {
                           required: true,
                         },
                       ]}
+                      onChange={(e) => settitile(e.target.value)}
                     >
                       <Input />
                     </Form.Item>
