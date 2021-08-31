@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,16 +13,28 @@
     "@material-ui/icons": "^4.11.2",
     "antd": "^4.16.13",
     "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "bootstrap": "^5.0.0-beta3",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.3",
+    "morgan": "^1.10.0",
     "next": "^11.1.0",
+    "passport": "^0.4.1",
+    "passport-custom": "^1.1.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "react": "17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-bootstrap-icons": "^1.5.0",
     "react-ckeditor-component": "^1.1.0",
     "react-dom": "17.0.2",
     "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "uid-safe": "^2.1.5"
   },
   "devDependencies": {
     "eslint": "7.32.0",

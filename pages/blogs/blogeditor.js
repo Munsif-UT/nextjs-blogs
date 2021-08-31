@@ -1,5 +1,5 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@material-ui/core";
 import ReactDOM from "react-dom";
 import { Row, Col } from "react-bootstrap";
@@ -12,6 +12,9 @@ import { Form, Input, InputNumber, Button } from "antd";
 import NavbarInventoolyWebsite from "./../../components/NavbarInventoolyWebsite";
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+import axiosNext from "../../components/axios";
+import axios from "axios"
+import { useRouter } from 'next/router'
 
 const { Dragger } = Upload;
 const layout = {
@@ -22,6 +25,8 @@ const layout = {
     span: 16,
   },
 };
+
+
 
 /* function getBase64(img, callback) {
   const reader = new FileReader();
@@ -65,14 +70,28 @@ const props = {
   },
 };
 function Avatar() {
+  const router = useRouter();
   const [name, setname] = useState("");
   const [titile, settitile] = useState("");
   const [ckeditorContent, setCkeditorContent] = useState("");
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [imageStatus, setImageStatus] = useState({
     loading: false,
   });
 
   const { loading, imageUrl } = imageStatus;
+
+  useEffect(async () => {
+  let data = await axiosNext(async (ax) => await ax.get("/test"), window.localStorage)
+  let loggedin = data.statusText === "OK"
+  setLoggedIn(loggedin);
+  if (loggedin) {
+    router.push("/blogs/blogeditor")
+  } else {
+    router.push("/blogs/bloggerauth")
+  }
+}, []);
+
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
