@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
 import { Form as FormAntd, Button } from "antd";
-import { useRouter } from "next/router";
 // import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import blogs from "../../public/frontend/media/logo_final-svg.png";
@@ -9,25 +8,43 @@ import Image from "next/image";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import Link from "next/link";
-
-// const isValidEmail = (email) => {
-//   const re =
-//     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//   return re.test(email);
-// };
-import axios from "axios";
+import axiosNext from "../../components/axios";
+import axios from "axios"
+import { useRouter } from 'next/router'
 function Signin() {
   const [togglePassword, setTogglePassword] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
+  useEffect(async () => {
+    let data = await axiosNext(async (ax) => await ax.get("/test"), window.localStorage)
+    let loggedin = data.statusText === "OK"
+    console.log(data)
+    setLoggedIn(loggedin);
+    if (loggedin) {
+      router.push("/blogs/blogeditor")
+    } else {
+      router.push("/blogs/bloggerauth")
+    }
+  }, []);
+
   const submitData = async () => {
-    const { data } = await axios.post("/api/bloggerauth", {
+
+    const { data } = await axiosNext(async () => await axios.post("/login", {
       email,
       password: pass,
-    });
-    alert(data.message);
+    }), localStorage);
+    localStorage.setItem("authToken", data.token);
+    axios.defaults.headers.common = {
+      Authorization: `bearer ${data.token}`,
+    };
+    if (data.token) {
+      router.push("/blogs/blogeditor")
+    }
+    // const response = await axios.get("/test");
+    // console.log(response);
   };
   return (
     <div
