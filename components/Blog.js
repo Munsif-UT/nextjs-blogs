@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Person, Clock, ChatDots } from "react-bootstrap-icons";
 function Blog({ blogNo, image, title, userName, comments, chat, content }) {
   return (
-    <div className="col-md-6">
+    <div className="col-md-4">
       <article className="article">
         <div className="article_image">
           <Image src={image || blogs3} alt="blog-1" className="img-fluid" />
@@ -25,14 +25,14 @@ function Blog({ blogNo, image, title, userName, comments, chat, content }) {
 
               <p>{userName || "blog.userName"}</p>
             </li>
-            <li className="d-flex align-items-center">
+            {/* <li className="d-flex align-items-center">
               <Clock />
               <p>{chat || "blog.chat"}</p>
             </li>
             <li className="d-flex align-items-center">
               <ChatDots />
               <p>{comments || "blog.comments"}</p>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="article_content">

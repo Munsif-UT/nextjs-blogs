@@ -9,39 +9,47 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import Link from "next/link";
 import axiosNext from "../../components/axios";
-import axios from "axios"
-import { useRouter } from 'next/router'
+import axios from "axios";
+import { useRouter } from "next/router";
 function Signin() {
   const [togglePassword, setTogglePassword] = useState(true);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-
-  useEffect(async () => {
-    let data = await axiosNext(async (ax) => await ax.get("/test"), window.localStorage)
-    let loggedin = data.statusText === "OK"
-    console.log(data)
+  const loginUser = async () => {
+    let data = await axiosNext(
+      async (ax) => await ax.get("/test"),
+      window.localStorage
+    );
+    let loggedin = data.statusText === "OK";
+    console.log(data);
     setLoggedIn(loggedin);
     if (loggedin) {
-      router.push("/blogs/blogeditor")
+      router.push("/blogs/editblogs");
     } else {
-      router.push("/blogs/bloggerauth")
+      router.push("/blogs/bloggerauth");
     }
+  };
+  useEffect(() => {
+    loginUser();
   }, []);
 
   const submitData = async () => {
-
-    const { data } = await axiosNext(async () => await axios.post("/login", {
-      email,
-      password: pass,
-    }), localStorage);
+    const { data } = await axiosNext(
+      async () =>
+        await axios.post("/login", {
+          email,
+          password: pass,
+        }),
+      localStorage
+    );
     localStorage.setItem("authToken", data.token);
     axios.defaults.headers.common = {
       Authorization: `bearer ${data.token}`,
     };
     if (data.token) {
-      router.push("/blogs/blogeditor")
+      router.push("/blogs/editblogs");
     }
     // const response = await axios.get("/test");
     // console.log(response);

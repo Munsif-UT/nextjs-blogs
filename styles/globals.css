@@ -448,3 +448,10 @@ a {
   font-size: 1rem !important;
   border-radius: 0.25rem !important;
 }
+.blogEditButtons {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+}
