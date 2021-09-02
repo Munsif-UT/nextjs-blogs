@@ -3,7 +3,17 @@ import blogs3 from "../public/frontend/media/blogs1.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import { Person, Clock, ChatDots } from "react-bootstrap-icons";
-function Blog({ blogNo, image, title, userName, comments, chat, content }) {
+import ReactHtmlParser from "react-html-parser";
+function Blog({
+  blogNo,
+  image,
+  blogTitle,
+  userName,
+  comments,
+  chat,
+  blogDesc = "dsfa",
+  permalink,
+}) {
   return (
     <div className="col-md-4">
       <article className="article">
@@ -11,9 +21,9 @@ function Blog({ blogNo, image, title, userName, comments, chat, content }) {
           <Image src={image || blogs3} alt="blog-1" className="img-fluid" />
         </div>
         <h2 className="article_title">
-          <Link href={`/blogs/${blogNo}`}>
+          <Link href={`/blogs/${permalink}`}>
             <a className="commonLinkStyle">
-              {(title && title.slice(0, 100)) ||
+              {(blogTitle && blogTitle.slice(0, 100)) ||
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hicdistinctio quibusdam ex."}
             </a>
           </Link>
@@ -37,7 +47,8 @@ function Blog({ blogNo, image, title, userName, comments, chat, content }) {
         </div>
         <div className="article_content">
           <p>
-            {(content && content.slice(0, 200)) ||
+            {(ReactHtmlParser(blogDesc) &&
+              ReactHtmlParser(blogDesc.slice(0, 200))) ||
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit harum culpa cum reprehenderit quibusdam inventore eaque sequi ipsam,dolores sapiente quam eligendi debitis aperiam eveniet expedita dolorum assumenda facere dolor."}
           </p>
           <div className="read-more">
@@ -45,7 +56,7 @@ function Blog({ blogNo, image, title, userName, comments, chat, content }) {
               // href={`/blogs/${blogNo} `}
               href={{
                 pathname: "/blogs/[id]",
-                query: { id: blogNo },
+                query: { id: permalink },
               }}
             >
               <a className="commonLinkStyle" style={{ color: "white" }}>

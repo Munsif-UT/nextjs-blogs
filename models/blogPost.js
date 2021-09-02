@@ -7,14 +7,16 @@ const schema = new Schema(
     metaTitle: String,
     metaDescription: String,
     metaKeywords: String,
-    title: String,
+    blogTitle: String,
     permalink: String,
-    featuredImage: String,
+    blogImage: String,
+    blogDesc: String,
     images: {
-      imageUrl: String,
       imageAlt: String,
       imageTitle: String,
-      imageCaption: String,
+    },
+    blogAutherName: {
+      type: String,
     },
   },
   { timestamps: true }

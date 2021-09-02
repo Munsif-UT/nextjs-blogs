@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import axiosNext from "../../../components/axios";
-import blogs3 from "../../../public/frontend/media/blogs1.jpg";
+import axiosNext from "../../../../components/axios";
+import blogs3 from "../../../../public/frontend/media/blogs1.jpg";
 import { Person } from "react-bootstrap-icons";
 import Image from "next/image";
 import Link from "next/link";

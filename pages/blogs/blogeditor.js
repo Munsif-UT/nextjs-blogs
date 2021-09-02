@@ -13,8 +13,8 @@ import NavbarInventoolyWebsite from "./../../components/NavbarInventoolyWebsite"
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import axiosNext from "../../components/axios";
-import axios from "axios"
-import { useRouter } from 'next/router'
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const { Dragger } = Upload;
 const layout = {
@@ -25,25 +25,6 @@ const layout = {
     span: 16,
   },
 };
-
-
-
-/* function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
-function beforeUpload(file) {
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-  if (!isJpgOrPng) {
-    message.error("You can only upload JPG/PNG file!");
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
-  }
-  return isJpgOrPng && isLt2M;
-} */
 const validateMessages = {
   required: "${label} is required!",
   number: {
@@ -71,8 +52,6 @@ const props = {
 };
 function Avatar() {
   const router = useRouter();
-  const [name, setname] = useState("");
-  const [titile, settitile] = useState("");
   const [ckeditorContent, setCkeditorContent] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [imageStatus, setImageStatus] = useState({
@@ -82,34 +61,32 @@ function Avatar() {
   const { loading, imageUrl } = imageStatus;
 
   useEffect(async () => {
-  let data = await axiosNext(async (ax) => await ax.get("/test"), window.localStorage)
-  let loggedin = data.statusText === "OK"
-  setLoggedIn(loggedin);
-  if (loggedin) {
-    router.push("/blogs/blogeditor")
-  } else {
-    router.push("/blogs/bloggerauth")
-  }
-}, []);
-
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
-  const onFinish = (values) => {
-    console.log(values);
+    let data = await axiosNext(
+      async (ax) => await ax.get("/test"),
+      window.localStorage
+    );
+    let loggedin = data.statusText === "OK";
+    setLoggedIn(loggedin);
+    if (loggedin) {
+      router.push("/blogs/blogeditor");
+    } else {
+      router.push("/blogs/bloggerauth");
+    }
+  }, []);
+  const onFinish = async (values) => {
+    values.ckEditorValue = ckeditorContent;
+    // values.blogDescription = values.blog;
+    const { data } = await axiosNext(
+      async () => await axios.post("/fetchblogs", { values }),
+      window.localStorage
+    );
+    console.log(data);
   };
   function onChange(evt) {
-    console.log("onChange fired with event info: ", evt);
     var newContent = evt.editor.getData();
     setCkeditorContent(newContent);
   }
-  function afterPaste(evt) {
-    console.log("afterPaste event called with event info: ", evt);
-  }
-  console.log(ckeditorContent);
+
   return (
     <div
       className="blogeditor"
@@ -132,68 +109,128 @@ function Avatar() {
                     bgcolor="#fff"
                     borderRadius={7}
                   >
+                    <div className="formImageAndValues">
+                      <Form.Item
+                        name={["blogImage"]}
+                        label="Blog Picture"
+                        /* rules={[
+                        {
+                          required: true,
+                        },
+                      ]} */
+                      >
+                        <Dragger {...props}>
+                          <p className="ant-upload-drag-icon">
+                            <InboxOutlined />
+                          </p>
+                          <p className="ant-upload-text">
+                            Click or drag file to this area to upload
+                          </p>
+                          <p className="ant-upload-hint">
+                            Support for a single or bulk upload. Strictly
+                            prohibit from uploading company data or other band
+                            files
+                          </p>
+                        </Dragger>
+                      </Form.Item>
+                      <div className="formOptions">
+                        <Form.Item
+                          name={["imageAlt"]}
+                          label="image alt"
+                          rules={[
+                            {
+                              required: true,
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                        <Form.Item
+                          name={["imagetitle"]}
+                          label="image Title"
+                          rules={[
+                            {
+                              required: true,
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                      </div>
+                    </div>
+
                     <Form.Item
-                      name={["blogImage"]}
-                      label="Blog Picture"
+                      name={["metatitle"]}
+                      label="Meta Title"
                       rules={[
                         {
                           required: true,
                         },
                       ]}
                     >
-                      <Dragger {...props}>
-                        <p className="ant-upload-drag-icon">
-                          <InboxOutlined />
-                        </p>
-                        <p className="ant-upload-text">
-                          Click or drag file to this area to upload
-                        </p>
-                        <p className="ant-upload-hint">
-                          Support for a single or bulk upload. Strictly prohibit
-                          from uploading company data or other band files
-                        </p>
-                      </Dragger>
-                      ,
+                      <Input />
                     </Form.Item>
                     <Form.Item
-                      name={["blog", "authername"]}
+                      name={["metaDesc"]}
+                      label="Meta Description"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
+                    <Form.Item
+                      name={["permalink"]}
+                      label="Permalink"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
+                    <Form.Item
+                      name={["metakeywords"]}
+                      label="Meta keywords"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
+
+                    <Form.Item
+                      name={["blogauthername"]}
                       label="Auther Name"
                       rules={[
                         {
                           required: true,
                         },
                       ]}
-                      onChange={(e) => setname(e.target.value)}
                     >
                       <Input />
                     </Form.Item>
                     <Form.Item
-                      name={["blog", "title"]}
+                      name={["blogtitile"]}
                       label="Blog Title"
                       rules={[
                         {
                           required: true,
                         },
                       ]}
-                      onChange={(e) => settitile(e.target.value)}
                     >
                       <Input />
                     </Form.Item>
-                    <Form.Item
-                      name={["blog", "description"]}
-                      label="Blog Description :"
-                      rules={[
-                        {
-                          required: true,
-                        },
-                      ]}
-                    >
-                      {/*  <Input.TextArea /> */}
+                    <Form.Item label="Blog Description :">
                       <CKEditor
                         activeClass="p10"
                         content={ckeditorContent}
                         events={{
-                          afterPaste: afterPaste,
                           change: onChange,
                         }}
                       />
