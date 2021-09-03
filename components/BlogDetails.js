@@ -4,12 +4,27 @@ import Image from "next/image";
 import ReactHtmlParser from "react-html-parser";
 // import Link from "next/link";
 import { Person, Clock, ChatDots } from "react-bootstrap-icons";
-function BlogDetails({ image, title, userName, content }) {
+function BlogDetails({
+  image,
+  title,
+  userName,
+  blogDescription,
+  imageAlt,
+  imageTitle,
+  createdAT,
+}) {
   return (
-    <div className="col-md-6">
+    <div className="col-md-12">
       <article className="article">
         <div className="article_image">
-          <Image src={image || blogs3} alt="blog-1" className="img-fluid" />
+          <Image
+            src={`/uploads/${image}` || blogs3}
+            alt={imageAlt}
+            title={imageTitle}
+            className="img-fluid"
+            width={400}
+            height={300}
+          />
         </div>
         <h2 className="article_title">
           {(title && title.slice(0, 100)) ||
@@ -22,11 +37,11 @@ function BlogDetails({ image, title, userName, content }) {
 
               <p>{userName || "blog.userName"}</p>
             </li>
-            {/* <li className="d-flex align-items-center">
-              <Clock />
-              <p>{chat || "blog.chat"}</p>
-            </li>
             <li className="d-flex align-items-center">
+              <Clock />
+              <p>{createdAT || "blog.chat"}</p>
+            </li>
+            {/* <li className="d-flex align-items-center">
               <ChatDots />
               <p>{comments || "blog.comments"}</p>
             </li> */}
@@ -34,7 +49,7 @@ function BlogDetails({ image, title, userName, content }) {
         </div>
         <div className="article_content">
           <p className="descPara">
-            {ReactHtmlParser(content) ||
+            {ReactHtmlParser(blogDescription) ||
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit harum culpa cum reprehenderit quibusdam inventore eaque sequi ipsam,dolores sapiente quam eligendi debitis aperiam eveniet expedita dolorum assumenda facere dolor."}
           </p>
           {/* <blockquote className="article_blockquote">

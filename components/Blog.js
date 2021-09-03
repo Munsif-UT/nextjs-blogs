@@ -8,17 +8,25 @@ function Blog({
   blogNo,
   image,
   blogTitle,
-  userName,
-  comments,
-  chat,
+  auther,
+  imageAlt,
   blogDesc = "dsfa",
   permalink,
+  imagetitle,
+  createdAT,
 }) {
   return (
-    <div className="col-md-4">
+    <div className="col-md-6">
       <article className="article">
         <div className="article_image">
-          <Image src={image || blogs3} alt="blog-1" className="img-fluid" />
+          <Image
+            src={`/uploads/${image}` || blogs3}
+            alt={imageAlt}
+            title={imagetitle}
+            className="img-fluid"
+            width={400}
+            height={300}
+          />
         </div>
         <h2 className="article_title">
           <Link href={`/blogs/${permalink}`}>
@@ -33,13 +41,13 @@ function Blog({
             <li className="d-flex align-items-center">
               <Person />
 
-              <p>{userName || "blog.userName"}</p>
-            </li>
-            {/* <li className="d-flex align-items-center">
-              <Clock />
-              <p>{chat || "blog.chat"}</p>
+              <p>{auther || "blog.userName"}</p>
             </li>
             <li className="d-flex align-items-center">
+              <Clock />
+              <p>{createdAT || "2/06/2021"}</p>
+            </li>
+            {/* <li className="d-flex align-items-center">
               <ChatDots />
               <p>{comments || "blog.comments"}</p>
             </li> */}

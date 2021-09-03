@@ -11,8 +11,8 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 // ADD THIS
-var cors = require("cors");
-app.use(cors());
+// var cors = require("cors");
+// app.use(cors());
 nextApp.prepare().then(() => {
   const app = express();
   setupDatabase();

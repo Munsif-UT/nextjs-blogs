@@ -21,6 +21,7 @@ function blogs({ Blogs }) {
         <title>Inventooly Blog</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:title" content="Inventooly Blogs" key="title" />
+        <meta name="description" content="Inventooly Blogs" />
       </Head>
       <NavbarInventoolyWebsite />
       <section>
@@ -36,7 +37,7 @@ function blogs({ Blogs }) {
             {Blogs.map((blog) => (
               <Blog
                 key={blog._id}
-                blogImage={blog.blogImage}
+                image={blog.blogImage}
                 blogTitle={blog.blogTitle}
                 auther={blog.blogauthername}
                 blogDesc={blog.blogDesc}

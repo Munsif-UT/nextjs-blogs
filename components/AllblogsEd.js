@@ -58,8 +58,8 @@ function AllblogsEd({ blogNo, image, title, userName, content, deleteblog }) {
             </div>
             <div className="editBlog">
               <Link
-                href="/blogs/editblogs/[id]"
-                as={`/blogs/editblogs/${blogNo}`}
+                href={`/blogs/editblogs/${blogNo}/Edit`}
+                // as={`/blogs/editblogs/${blogNo}/Edit`}
               >
                 <a>
                   <button className="btn btn-primary">Edit</button>
