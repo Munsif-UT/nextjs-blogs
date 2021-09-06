@@ -969,7 +969,8 @@ const Home = () => {
                     >
                       Easy to understand dashboards & creating purchase orders
                       in minutes. Managing my sales channels is much less
-                      stressful since I started using Inventooly's services.
+                      stressful since I started using Inventooly&apos;s
+                      services.
                     </p>
                     {/* <a href="#" class="btn  btnMain btn-lg">Go somewhere</a> */}
                   </div>

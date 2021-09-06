@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
 import { Form as FormAntd, Button } from "antd";
-// import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import blogs from "../../public/frontend/media/logo_final-svg.png";
 import Image from "next/image";
@@ -33,6 +32,7 @@ function Signin() {
   };
   useEffect(() => {
     loginUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const submitData = async () => {
@@ -51,8 +51,6 @@ function Signin() {
     if (data.token) {
       router.push("/blogs/editblogs");
     }
-    // const response = await axios.get("/test");
-    // console.log(response);
   };
   return (
     <div
@@ -70,29 +68,6 @@ function Signin() {
               className="div"
               style={{ marginTop: "10px", marginBottom: "10px" }}
             >
-              {/* <button
-                onClick={() => {
-                  router.push("/");
-                }}
-                style={{
-                  margin: "10px",
-                  float: "right",
-                  padding: "5px 19px",
-                  background: "white",
-                  outline: "none",
-                  color: "black",
-                  borderRadius: "4px",
-                  fontSize: "18px",
-                  letterSpacing: "1px",
-                  transition: "1s",
-                  border: "2px solid white",
-                  marginBottom: "20px",
-                  boxShadow: "rgb(65 84 241 / 40%) 0px 5px 30px",
-                  fontFamily: "Nunito, sans-serif",
-                }}
-              >
-                Back To Home
-              </button> */}
               <Link href="/">
                 <a
                   style={{
@@ -206,11 +181,6 @@ function Signin() {
                           >
                             <AlternateEmailIcon />
                           </div>
-                          {/* {!errors?.email && (
-                            <div className="register__Logo">
-                              <AlternateEmailIcon />
-                            </div>
-                          )} */}
                         </FormAntd.Item>
                       </div>
                       <div className="from__wrapper_pass">
@@ -244,11 +214,6 @@ function Signin() {
                               />
                             )}
                           </div>
-                          {/* {!errors?.phone && (
-                            <div className="register__Logo">
-                              <DialpadIcon />
-                            </div>
-                          )} */}
                         </FormAntd.Item>
                       </div>
                       <div

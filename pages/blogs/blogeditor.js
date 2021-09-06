@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@material-ui/core";
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import "antd/dist/antd.css";
 import CKEditor from "react-ckeditor-component";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Image from "next/image";
 import { Form, Input, Button } from "antd";
 import NavbarInventoolyWebsite from "./../../components/NavbarInventoolyWebsite";
-import { Upload, message } from "antd";
 import axiosNext from "../../components/axios";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -30,13 +28,7 @@ function Avatar() {
   const [ckeditorContent, setCkeditorContent] = useState("");
   const [image, setImage] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [imageStatus, setImageStatus] = useState({
-    loading: false,
-  });
-
-  const { loading, imageUrl } = imageStatus;
-
-  useEffect(async () => {
+  async function blogEditor() {
     let data = await axiosNext(
       async (ax) => await ax.get("/test"),
       window.localStorage
@@ -48,10 +40,12 @@ function Avatar() {
     } else {
       router.push("/blogs/bloggerauth");
     }
+  }
+  useEffect(() => {
+    blogEditor();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const onFinish = async (values) => {
-    console.log(values);
-    console.log(values.blogImage);
     const formData = new FormData();
     values.ckEditorValue = ckeditorContent;
     formData.append("imageAlt", values.imageAlt);
@@ -64,7 +58,6 @@ function Avatar() {
     formData.append("blogtitile", values.blogtitile);
     formData.append("ckEditorValue", values.ckEditorValue);
     formData.append("blogImage", image);
-    // console.log(formData);
     const { data } = await axiosNext(
       async () => await axios.post("/fetchblogs", formData),
       window.localStorage

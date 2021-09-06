@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 // import { role } from "../../enumerations";
 import { List } from "react-bootstrap-icons";
 // import blogs from "../public/frontend/media/logo_final-svg.png";
@@ -53,7 +52,7 @@ function NavbarInventoolyWebsite() {
               padding: "0px",
             }}
           >
-            <img
+            <Image
               src="/frontend/media/logo_final-svg.png"
               style={{ marginRight: "6px", marginTop: "5px" }}
               alt=""

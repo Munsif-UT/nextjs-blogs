@@ -59,7 +59,7 @@ function blogs({ Blogs }) {
 }
 
 export default blogs;
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // const { data } = await axios.get("/getblogs");
   const res = await fetch("http://localhost:3000/api/getblogs", {
     method: "GET",

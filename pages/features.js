@@ -450,7 +450,8 @@ const FrontFeatures = () => {
                     >
                       Easy to understand dashboards & creating purchase orders
                       in minutes. Managing my sales channels is much less
-                      stressful since I started using Inventooly's services.
+                      stressful since I started using Inventooly&apos;s
+                      services.
                     </p>
                     {/* <a href="#" class="btn  btnMain btn-lg">Go somewhere</a> */}
                   </div>
@@ -629,7 +630,7 @@ const FrontFeatures = () => {
                     height: "100%",
                   }}
                 >
-                  <img src={blogs2} alt="" />
+                  <Image src={blogs2} alt="" />
                   <div
                     className="img-overlay blogOverlay"
                     style={{
@@ -684,7 +685,7 @@ const FrontFeatures = () => {
                     height: "100%",
                   }}
                 >
-                  <img src={blogs3} alt="" />
+                  <Image src={blogs3} alt="" />
                   <div
                     className="img-overlay blogOverlay"
                     style={{

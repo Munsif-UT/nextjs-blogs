@@ -7,8 +7,20 @@ import BlogDetails from "../../components/BlogDetails";
 import axios from "axios";
 import Head from "next/head";
 function BlogDetail({ blogsData }) {
-  console.log(blogsData);
   const [loading, setloading] = useState(false);
+  // const [blogsData, setblogsData] = useState({});
+  // async function fetchSpecificBlog() {
+  //   // console.log(router.query.id);
+  //   const { data } = await axiosNext(
+  //     async (ax) => await ax.get(`/fetchblogs/${router.query.id}`),
+  //     window.localStorage
+  //   );
+  //   setloading(false);
+  //   setblogDetail(data.data);
+  // }
+  // useEffect(() => {
+  //   fetchSpecificBlog();
+  // }, []);
   useEffect(() => {
     setloading(false);
   }, []);
