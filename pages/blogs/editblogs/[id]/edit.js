@@ -25,13 +25,14 @@ const validateMessages = {
     range: "${label} must be between ${min} and ${max}",
   },
 };
-function Edit() {
-  const router = useRouter();
-  
-  const [blogEditableFields, setblogEditableFields] = useState("");
-  const [ckeditorContent, setCkeditorContent] = useState(blogEditableFields.blogDesc || "");
-  const [image, setImage] = useState(blogEditableFields.blogImage
- || "" );
+function Edit({ blogEditableFields }) {
+  // const router = useRouter({ blogEditableFields });
+
+  // const [blogEditableFields, setblogEditableFields] = useState("");
+  const [ckeditorContent, setCkeditorContent] = useState(
+    blogEditableFields.blogDesc || ""
+  );
+  const [image, setImage] = useState(blogEditableFields.blogImage || "");
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [imageStatus, setImageStatus] = useState({
     loading: false,
@@ -52,30 +53,19 @@ function Edit() {
   //     router.push("/blogs/bloggerauth");
   //   }
   // }, []);
-  useEffect(async () => {
-    console.log(router.query.id)
-    /* if (router.query.id) {
-      axios
-        .get(`/fetchblogs/${router.query.id}`)
-        .then((res) => {
-          console.log(res)
-          setblogEditableFields(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } */
-    const res = await fetch(
-      `http://localhost:3000/api/fetchblogs/${router.query.id}`,
-      {
-        method: "GET",
-      }
-    );
-    const data = await res.json();
-    console.log(data.data)
-    console.log(data)
-    setblogEditableFields(data.data);
-  }, [router.query.id]);
+  // useEffect(async () => {
+  //   console.log(router.query.id)
+  //   const res = await fetch(
+  //     `http://localhost:3000/api/fetchblogs/${router.query.id}`,
+  //     {
+  //       method: "GET",
+  //     }
+  //   );
+  //   const data = await res.json();
+  //   console.log(data.data)
+  //   console.log(data)
+  //   setblogEditableFields(data.data);
+  // }, [router.query.id]);
   const onFinish = async (values) => {
     console.log(values);
     console.log(values.blogImage);
@@ -93,17 +83,29 @@ function Edit() {
     formData.append("blogImage", image);
     // console.log(formData);
     const { data } = await axiosNext(
-      async () => await axios.post("/fetchblogs", formData),
+      async () =>
+        await axios.put(`/fetchblogs/${blogEditableFields._id}`, formData),
       window.localStorage
     );
+    console.log("respomse");
     console.log(data);
   };
   function onChange(evt) {
     var newContent = evt.editor.getData();
     setCkeditorContent(newContent);
   }
-const {metaTitle,metaDescription,metaKeywords,blogTitle,permalink,blogImage,blogDesc,images,blogAutherName}=blogEditableFields;
-console.log(blogEditableFields)
+  const {
+    metaTitle,
+    metaDescription,
+    metaKeywords,
+    blogTitle,
+    permalink,
+    blogImage,
+    blogDesc,
+    images,
+    blogAutherName,
+  } = blogEditableFields;
+  console.log(blogEditableFields);
   return (
     <div
       className="blogeditor"
@@ -117,20 +119,27 @@ console.log(blogEditableFields)
               <div className="col-md-10 formWrapper">
                 <Form
                   {...layout}
-                  initialValues={{ metatitle:`${metaTitle}`,
-                  metaDesc:`${metaDescription}`,
-                  permalink:`${permalink}`,
-                  metakeywords:`${metaKeywords}`,
-                  blogauthername:`${blogAutherName}`,
-                  blogtitile:`${blogTitle}`,
-                  
-                   }}
+                  initialValues={{
+                    metatitle: `${metaTitle}`,
+                    metaDesc: `${metaDescription}`,
+                    permalink: `${permalink}`,
+                    metakeywords: `${metaKeywords}`,
+                    blogauthername: `${blogAutherName}`,
+                    blogtitile: `${blogTitle}`,
+                    imageAlt: `${images.imageAlt}`,
+                    imagetitle: `${images.imageTitle}`,
+                    blogImage: `${blogImage}`,
+                  }}
                   name="nest-messages"
                   onFinish={onFinish}
                   validateMessages={validateMessages}
                   encType="multipart/form-data"
                 >
-                  <Box className="page pt-35 p-5" bgcolor="#fff" borderRadius={7} >
+                  <Box
+                    className="page pt-35 p-5"
+                    bgcolor="#fff"
+                    borderRadius={7}
+                  >
                     <div className="formImageAndValues">
                       <input
                         type="file"
@@ -138,28 +147,29 @@ console.log(blogEditableFields)
                         onChange={(e) => setImage(e.target.files[0])}
                       />
                       {/* </Form.Item> */}
-                        <Form.Item
-                          name={["imageAlt"]}
-                          label="image alt"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
-                        >
-                          <Input /* value={blogEditableFields.images.imageAlt} */ />
-                        </Form.Item>
-                        <Form.Item
-                          name={["imagetitle"]}
-                          label="image Title"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
-                        >
-                          <Input />
-                        </Form.Item>
+                      <Form.Item
+                        name={["imageAlt"]}
+                        label="image alt"
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Input /* value={blogEditableFields.images.imageAlt} */
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        name={["imagetitle"]}
+                        label="image Title"
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Input />
+                      </Form.Item>
                     </div>
                     <Form.Item
                       name={["metatitle"]}
@@ -255,4 +265,13 @@ console.log(blogEditableFields)
     </div>
   );
 }
+Edit.getInitialProps = async ({ query }) => {
+  console.log(query);
+  const res = await fetch(`http://localhost:3000/api/fetchblogs/${query.id}`, {
+    method: "GET",
+  });
+  const { data } = await res.json();
+  console.log(data);
+  return { blogEditableFields: data };
+};
 export default Edit;

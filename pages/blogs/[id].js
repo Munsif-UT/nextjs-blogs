@@ -2,28 +2,14 @@ import React, { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import NavbarInventoolyWebsite from "../../components/NavbarInventoolyWebsite";
 import { useRouter } from "next/router";
-import blogsData from "./../../data/blogsData";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BlogDetails from "../../components/BlogDetails";
 import axios from "axios";
-import { set } from "mongoose";
 import Head from "next/head";
-function BlogDetail() {
-  const [blogsData, setblogsData] = useState({});
-  const [loading, setloading] = useState(true);
-  const router = useRouter();
-  console.log(router.query.id);
-  console.log(router.query);
-  useEffect(async () => {
-    setloading(true);
-    const res = await fetch(
-      `http://localhost:3000/api/getblogs/${router.query.id}`,
-      {
-        method: "GET",
-      }
-    );
-    const data = await res.json();
-    setblogsData(data.data);
+function BlogDetail({ blogsData }) {
+  console.log(blogsData);
+  const [loading, setloading] = useState(false);
+  useEffect(() => {
     setloading(false);
   }, []);
   return (
@@ -73,16 +59,19 @@ function BlogDetail() {
     </>
   );
 }
+BlogDetail.getInitialProps = async (context) => {
+  const { query } = context;
+  // if (!context.req) {
+  //   return {
+  //     blogsData: {},
+  //   };
+  // }
+  const res = await fetch(`http://localhost:3000/api/getblogs/${query.id}`, {
+    method: "GET",
+  });
+  const { data } = await res.json();
+  console.log(data);
+  return { blogsData: data };
+};
 
 export default BlogDetail;
-// export async function getServerSideProps({ params }) {
-//   console.log(params.id);
-//   const { data } = await axios.get(
-//     `https://localhost:3000/api/getblogs/${params.id}`
-//   );
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// }

@@ -39,7 +39,7 @@ function blogs({ Blogs }) {
                 key={blog._id}
                 image={blog.blogImage}
                 blogTitle={blog.blogTitle}
-                auther={blog.blogauthername}
+                auther={blog.blogAutherName}
                 blogDesc={blog.blogDesc}
                 metaDescription={blog.metaDescription}
                 metaTitle={blog.metaTitle}

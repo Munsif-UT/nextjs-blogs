@@ -2,60 +2,102 @@ import { authenticateAuthToken } from "../../../middlewares/auth";
 import { runMiddleware } from "../../../middlewares/runMiddleware";
 // import passport from 'passport'
 import blogpost from "../../../models/blogpost";
-export default async function handler(req, res) {
-  const {
-    query: { id },
-    method,
-  } = req;
+import nextConnect from "next-connect";
+import multer from "multer";
+/* multer image upload */
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: "./public/uploads",
+    filename: (req, file, cb) => cb(null, file.originalname),
+  }),
+});
+/* multer image upload */
 
-  switch (method) {
-    case "GET":
-      try {
-        // await runMiddleware(req, res, authenticateAuthToken); // --> to authenticate the user
-        const blog = await blogpost.findById(id);
-
-        if (!blog) {
-          return res.status(400).json({ success: false });
-        }
-
-        res.status(200).json({ success: true, data: blog });
-      } catch (error) {
-        res.status(400).json({ success: false });
+const apiRoute = nextConnect({
+  // Handle any other HTTP method
+  onNoMatch(req, res) {
+    res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
+  },
+});
+const uploadMiddleware = upload.single("blogImage");
+apiRoute.use(uploadMiddleware);
+apiRoute.put(async (req, res) => {
+  try {
+    // await runMiddleware(req, res, authenticateAuthToken);
+    const { id } = req.query;
+    console.log("sdssdsdsdsds");
+    console.log(req.body);
+    const {
+      blogauthername,
+      blogtitile,
+      ckEditorValue,
+      imageAlt,
+      imagetitle,
+      metaDesc,
+      metakeywords,
+      metatitle,
+      permalink,
+    } = req.body;
+    console.log(req.body);
+    const blog = await blogpost.findByIdAndUpdate(
+      id,
+      {
+        metaTitle: metatitle,
+        metaDescription: metaDesc,
+        metaKeywords: metakeywords,
+        blogTitle: blogtitile,
+        permalink,
+        blogImage: req.file.originalname,
+        blogDesc: ckEditorValue,
+        images: {
+          imageAlt,
+          imageTitle: imagetitle,
+        },
+        blogAutherName: blogauthername,
+      },
+      {
+        new: true,
+        runValidators: true,
       }
-      break;
-    case "PUT":
-      try {
-        await runMiddleware(req, res, authenticateAuthToken);
-        const blog = await blogpost.findByIdAndUpdate(id, req.body, {
-          new: true,
-          runValidators: true,
-        });
+    );
+    console.log(blog);
+    if (!blog) {
+      return res.status(400).json({ success: false });
+    }
 
-        if (!blog) {
-          return res.status(400).json({ success: false });
-        }
-
-        res.status(200).json({ success: true, data: blog });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
-    case "DELETE":
-      try {
-        await runMiddleware(req, res, authenticateAuthToken);
-        const deletedBlog = await blogpost.deleteOne({ _id: id });
-
-        if (!deletedBlog) {
-          return res.status(400).json({ success: false });
-        }
-
-        res.status(200).json({ success: true });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
-    default:
-      res.status(400).json({ success: false });
-      break;
+    res.status(200).json({ success: true, data: blog });
+  } catch (error) {
+    res.status(400).json({ success: false });
   }
-}
+});
+apiRoute.get(async (req, res) => {
+  try {
+    // await runMiddleware(req, res, authenticateAuthToken); // --> to authenticate the user
+    const { id } = req.query;
+    const blog = await blogpost.findById(id);
+
+    if (!blog) {
+      return res.status(400).json({ success: false });
+    }
+
+    res.status(200).json({ success: true, data: blog });
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
+});
+apiRoute.delete(async (req, res) => {
+  try {
+    // await runMiddleware(req, res, authenticateAuthToken);
+    const { id } = req.query;
+    const deletedBlog = await blogpost.deleteOne({ _id: id });
+
+    if (!deletedBlog) {
+      return res.status(400).json({ success: false });
+    }
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
+});
+export default apiRoute;

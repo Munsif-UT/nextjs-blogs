@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import blogs3 from "../public/frontend/media/blogs1.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import { Person } from "react-bootstrap-icons";
-import axiosNext from "../components/axios";
+import { Person, Clock } from "react-bootstrap-icons";
+import ReactHtmlParser from "react-html-parser";
 // import { useRouter } from "next/router";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-function AllblogsEd({ blogNo, image, title, userName, content, deleteblog }) {
+function AllblogsEd({
+  blogNo,
+  image,
+  title,
+  auther,
+  description,
+  createdAt,
+  deleteblog,
+}) {
   // const router = useRouter();
   const [modalOpen, setModalOpen] = React.useState(false);
   return (
@@ -77,7 +85,13 @@ function AllblogsEd({ blogNo, image, title, userName, content, deleteblog }) {
             </div>
           </div>
           <div className="article_image">
-            <Image src={image || blogs3} alt="blog-1" className="img-fluid" />
+            <Image
+              src={`/uploads/${image}` || blogs3}
+              alt="blog-1"
+              className="img-fluid"
+              height={400}
+              width={500}
+            />
           </div>
           <h2 className="article_title">
             <Link href={`/blogs/${blogNo}`}>
@@ -89,12 +103,26 @@ function AllblogsEd({ blogNo, image, title, userName, content, deleteblog }) {
               <li className="d-flex align-items-center">
                 <Person />
 
-                <p>{userName}</p>
+                <p>{auther}</p>
+              </li>
+              <li className="d-flex align-items-center">
+                <Clock />
+
+                <p>
+                  {new Date(createdAt).toLocaleString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </p>
               </li>
             </ul>
           </div>
           <div className="article_content">
-            <p>{content && content.slice(0, 200)}</p>
+            <p>
+              {ReactHtmlParser(description) &&
+                ReactHtmlParser(description.slice(0, 200))}
+            </p>
             <div className="read-more">
               <Link
                 // href={`/blogs/${blogNo} `}

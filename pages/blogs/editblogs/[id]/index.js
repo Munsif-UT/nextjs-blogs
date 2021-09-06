@@ -2,24 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axiosNext from "../../../../components/axios";
 import blogs3 from "../../../../public/frontend/media/blogs1.jpg";
-import { Person } from "react-bootstrap-icons";
+import { Person, Clock } from "react-bootstrap-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
-import { IdcardFilled } from "@ant-design/icons";
-function EditSpecificBlog() {
+import ReactHtmlParser from "react-html-parser";
+function EditSpecificBlog({ blogDetail }) {
+  console.log(blogDetail);
   const router = useRouter();
-  const [loading, setloading] = useState(true);
-  const [blogDetail, setblogDetail] = useState({});
-  async function fetchSpecificBlog() {
-    // console.log(router.query.id);
-    const { data } = await axiosNext(
-      async (ax) => await ax.get(`/fetchblogs/${router.query.id}`),
-      window.localStorage
-    );
-    setloading(false);
-    setblogDetail(data.data);
-  }
+  const [loading, setloading] = useState(false);
+  // const [blogDetail, setblogDetail] = useState({});
+  // async function fetchSpecificBlog() {
+  //   // console.log(router.query.id);
+  //   const { data } = await axiosNext(
+  //     async (ax) => await ax.get(`/fetchblogs/${router.query.id}`),
+  //     window.localStorage
+  //   );
+  //   setloading(false);
+  //   setblogDetail(data.data);
+  // }
   const [modalOpen, setModalOpen] = React.useState(false);
   async function deleteBLog(id) {
     console.log(id);
@@ -33,7 +34,7 @@ function EditSpecificBlog() {
     }
   }
   useEffect(() => {
-    fetchSpecificBlog();
+    // fetchSpecificBlog();
   }, []);
   return loading ? (
     <div>
@@ -79,11 +80,6 @@ function EditSpecificBlog() {
             className="container d-flex banner-m align-items-center justify-content-centre"
             style={{
               minHeight: "100vh",
-              /* background: `url("/frontend/media/light-bg2.png") top center no-repeat`,
-            backgroundSize: "cover",
-            backgroundAttachment: "fixed",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat", */
               padding: "150px 0px",
               overflow: "hidden",
             }}
@@ -92,16 +88,6 @@ function EditSpecificBlog() {
               <div className="col-md-6">
                 <article className="article" style={{ position: "relative" }}>
                   <div className="blogEditButtons">
-                    {/* <div className="viewBlog">
-                    <Link
-                      href="/blogs/editblogs/[id]"
-                      as={`/blogs/editblogs/${blogDetail._id}`}
-                    >
-                      <a>
-                        <button className="btn btn-primary">View</button>
-                      </a>
-                    </Link>
-                  </div> */}
                     <div className="editBlog">
                       <Link href={`/blogs/editblogs/${blogDetail._id}/Edit`}>
                         <a>
@@ -122,36 +108,39 @@ function EditSpecificBlog() {
 
                   <div className="article_image">
                     <Image
-                      src={/* blogDetail.image  ||*/ blogs3}
-                      alt="blog-1"
+                      src={`/uploads/${blogDetail.blogImage}` || blogs3}
+                      alt={blogDetail.images.imageAlt}
+                      title={blogDetail.images.imageTitle}
                       className="img-fluid"
+                      height={400}
+                      width={500}
                     />
                   </div>
                   <h2 className="article_title">
-                    {(blogDetail.title && blogDetail.title.slice(0, 100)) ||
+                    {blogDetail.blogTitle ||
                       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hicdistinctio quibusdam ex."}
                   </h2>
                   <div className="article_meta">
                     <ul>
                       <li className="d-flex align-items-center">
                         <Person />
-
-                        <p>{blogDetail.title || "blog.userName"}</p>
+                        <p>{blogDetail.blogAutherName || "blog.userName"}</p>
+                      </li>
+                      <li className="d-flex align-items-center">
+                        <Clock />
+                        <p>
+                          {new Date(blogDetail.createdAt).toLocaleString(
+                            "en-GB",
+                            { day: "numeric", month: "long", year: "numeric" }
+                          ) || "2/06/2021"}
+                        </p>
                       </li>
                     </ul>
                   </div>
                   <div className="article_content">
                     <p className="descPara">
-                      {blogDetail.metaDescription ||
+                      {ReactHtmlParser(blogDetail.blogDesc) ||
                         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit harum culpa cum reprehenderit quibusdam inventore eaque sequi ipsam,dolores sapiente quam eligendi debitis aperiam eveniet expedita dolorum assumenda facere dolor."}
-                    </p>
-                    <blockquote className="article_blockquote">
-                      <p>
-                        {blogDetail.metaKeywords || "This is a block Quote"}
-                      </p>
-                    </blockquote>
-                    <p className="descPara">
-                      {blogDetail.permalink || "this is another discription"}
                     </p>
                   </div>
                 </article>
@@ -163,17 +152,13 @@ function EditSpecificBlog() {
     </>
   );
 }
-
+EditSpecificBlog.getInitialProps = async ({ query }) => {
+  // console.log(query);
+  const res = await fetch(`http://localhost:3000/api/fetchblogs/${query.id}`, {
+    method: "GET",
+  });
+  const { data } = await res.json();
+  // console.log(data);
+  return { blogDetail: data };
+};
 export default EditSpecificBlog;
-// export async function getServerSideProps({ params }) {
-//   console.log(params.id);
-//   const { data } = await axiosNext(
-//     async (ax) => await ax.get(`/fetchblogs/${params.id}`)
-//   );
-//   console.log(data);
-//   return {
-//     props: {
-//       blogsData: [],
-//     },
-//   };
-// }

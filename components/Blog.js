@@ -40,12 +40,17 @@ function Blog({
           <ul>
             <li className="d-flex align-items-center">
               <Person />
-
               <p>{auther || "blog.userName"}</p>
             </li>
             <li className="d-flex align-items-center">
               <Clock />
-              <p>{createdAT || "2/06/2021"}</p>
+              <p>
+                {new Date(createdAT).toLocaleString("en-GB", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                }) || "2/06/2021"}
+              </p>
             </li>
             {/* <li className="d-flex align-items-center">
               <ChatDots />

@@ -65,8 +65,11 @@ function Allblogs() {
                     <AllblogsEd
                       blogNo={blog._id}
                       key={blog._id}
-                      title={blog.title}
-                      description={blog.metaDescription}
+                      image={blog.blogImage}
+                      auther={blog.blogAutherName}
+                      createdAt={blog.createdAt}
+                      title={blog.blogTitle}
+                      description={blog.blogDesc}
                       deleteblog={deleteblog}
                     />
                   );
