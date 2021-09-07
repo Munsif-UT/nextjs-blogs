@@ -5,7 +5,3 @@ services:
     container_name: "nextjs-blogs"
     ports:
       - "80:80"
-    links:
-      - "api"
-    networks:
-      - "main"
