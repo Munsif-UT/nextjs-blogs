@@ -24,5 +24,5 @@ const schema = new Schema(
 
 schema.plugin(mongoTenant);
 
-const blogpost = mongoose.models.blogpost || mongoose.model("blogpost", schema);
+const blogpost = mongoose.model("blogpost", schema);
 module.exports = blogpost;
