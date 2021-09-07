@@ -1,7 +1,7 @@
 import { authenticateAuthToken } from "../../../middlewares/auth";
 import { runMiddleware } from "../../../middlewares/runMiddleware";
 // import passport from 'passport'
-import blogpost from "../../../models/blogpost";
+import blogpost from "../../../models/blogPost";
 import nextConnect from "next-connect";
 import multer from "multer";
 /* multer image upload */
