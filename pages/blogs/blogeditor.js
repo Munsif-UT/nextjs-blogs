@@ -28,21 +28,24 @@ function Avatar() {
   const [ckeditorContent, setCkeditorContent] = useState("");
   const [image, setImage] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
-  async function blogEditor() {
-    let data = await axiosNext(
-      async (ax) => await ax.get("/test"),
-      window.localStorage
-    );
-    let loggedin = data.statusText === "OK";
-    setLoggedIn(loggedin);
-    if (loggedin) {
-      router.push("/blogs/blogeditor");
-    } else {
+  const loginUser = async () => {
+    try {
+      let data = await axiosNext(
+        async (ax) => await ax.get("/test"),
+        window.localStorage
+      );
+      let loggedin = data.status === 401;
+      console.log(data);
+      setLoggedIn(loggedin);
+      // if (loggedin) {
+      //   router.push("/blogs/editblogs");
+      // }
+    } catch (error) {
       router.push("/blogs/bloggerauth");
     }
-  }
+  };
   useEffect(() => {
-    blogEditor();
+    loginUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const onFinish = async (values) => {

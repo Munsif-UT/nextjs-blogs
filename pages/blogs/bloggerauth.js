@@ -12,10 +12,10 @@ import axios from "axios";
 import { useRouter } from "next/router";
 function Signin() {
   const [togglePassword, setTogglePassword] = useState(true);
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const loginUser = async () => {
     let data = await axiosNext(
       async (ax) => await ax.get("/test"),

@@ -21,6 +21,27 @@ function EditSpecificBlog({ blogDetail }) {
   //   setloading(false);
   //   setblogDetail(data.data);
   // }
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const loginUser = async () => {
+    try {
+      let data = await axiosNext(
+        async (ax) => await ax.get("/test"),
+        window.localStorage
+      );
+      let loggedin = data.status === 401;
+      console.log(data);
+      setLoggedIn(loggedin);
+      // if (loggedin) {
+      //   router.push(`/blogs/editblogs/${blog}`);
+      // }
+    } catch (error) {
+      router.push("/blogs/bloggerauth");
+    }
+  };
+  useEffect(() => {
+    loginUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [modalOpen, setModalOpen] = React.useState(false);
   async function deleteBLog(id) {
     console.log(id);

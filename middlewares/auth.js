@@ -15,8 +15,6 @@ const generateTokenResponse = (
   };
 };
 // ->to check wether user has authentication token
-const authenticateAuthToken = passport.authenticate("jwt", {
-  session: false,
-});
+const authenticateAuthToken = passport.authenticate("jwt", { session: false });
 
 module.exports = { generateTokenResponse, authenticateAuthToken };

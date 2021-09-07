@@ -16,12 +16,34 @@ import AllblogsEd from "../../../components/AllblogsEd";
 // import { InboxOutlined } from "@ant-design/icons";
 // import axiosNext from "../../components/axios";
 // import axios from "axios";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 function Allblogs() {
+  const router = useRouter();
   const [loading, setloading] = useState(true);
   const [allblogs, setallblogs] = useState([]);
 
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const loginUser = async () => {
+    try {
+      let data = await axiosNext(
+        async (ax) => await ax.get("/test"),
+        window.localStorage
+      );
+      let loggedin = data.status === 401;
+      console.log(data);
+      setLoggedIn(loggedin);
+      if (loggedin) {
+        router.push("/blogs/editblogs");
+      }
+    } catch (error) {
+      router.push("/blogs/bloggerauth");
+    }
+  };
+  useEffect(() => {
+    loginUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   async function deleteblog(id) {
     setloading(true);
     const { data } = await axiosNext(
@@ -40,7 +62,6 @@ function Allblogs() {
     setloading(false);
   };
   useEffect(() => {
-    console.log("inside useEffect");
     fetchAllBlogs();
   }, [loading]);
 
@@ -48,6 +69,20 @@ function Allblogs() {
     <div className="allblogs_editors">
       <div className="container">
         <Box className="mainContEditorPage">
+          <div
+            className="logoutBtn top-5"
+            style={{ position: "absolute", right: "20px" }}
+          >
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                window.localStorage.removeItem("authToken");
+                router.push("/blogs/bloggerauth");
+              }}
+            >
+              Logout
+            </button>
+          </div>
           <Box className="page pt-35" bgcolor="#fff" borderRadius={7}>
             <Row className="m-0 ">
               {loading ? (

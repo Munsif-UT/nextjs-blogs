@@ -26,14 +26,13 @@ const validateMessages = {
   },
 };
 function Edit({ blogEditableFields }) {
-  // const router = useRouter({ blogEditableFields });
+  const router = useRouter();
 
   // const [blogEditableFields, setblogEditableFields] = useState("");
   const [ckeditorContent, setCkeditorContent] = useState(
     blogEditableFields.blogDesc || ""
   );
   const [image, setImage] = useState(blogEditableFields.blogImage || "");
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const [imageStatus, setImageStatus] = useState({
     loading: false,
   });
@@ -66,6 +65,27 @@ function Edit({ blogEditableFields }) {
   //   console.log(data)
   //   setblogEditableFields(data.data);
   // }, [router.query.id]);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const loginUser = async () => {
+    try {
+      let data = await axiosNext(
+        async (ax) => await ax.get("/test"),
+        window.localStorage
+      );
+      let loggedin = data.status === 401;
+      console.log(data);
+      setLoggedIn(loggedin);
+      // if (loggedin) {
+      //   router.push("/blogs/editblogs");
+      // }
+    } catch (error) {
+      router.push("/blogs/bloggerauth");
+    }
+  };
+  useEffect(() => {
+    loginUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const onFinish = async (values) => {
     console.log(values);
     console.log(values.blogImage);

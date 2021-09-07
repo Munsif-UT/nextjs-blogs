@@ -16,7 +16,7 @@ function Blog({
   createdAT,
 }) {
   return (
-    <div className="col-md-6">
+    <div className="col-md-4 col-sm-6">
       <article className="article">
         <div className="article_image">
           <Image
@@ -28,7 +28,7 @@ function Blog({
             height={300}
           />
         </div>
-        <h2 className="article_title">
+        <h2 className="article_title" style={{ minHeight: "6.2vh" }}>
           <Link href={`/blogs/${permalink}`}>
             <a className="commonLinkStyle">
               {(blogTitle && blogTitle.slice(0, 100)) ||
@@ -61,7 +61,7 @@ function Blog({
         <div className="article_content">
           <p>
             {(ReactHtmlParser(blogDesc) &&
-              ReactHtmlParser(blogDesc.slice(0, 200))) ||
+              ReactHtmlParser(blogDesc.slice(0, 200) + " ...")) ||
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit harum culpa cum reprehenderit quibusdam inventore eaque sequi ipsam,dolores sapiente quam eligendi debitis aperiam eveniet expedita dolorum assumenda facere dolor."}
           </p>
           <div className="read-more">

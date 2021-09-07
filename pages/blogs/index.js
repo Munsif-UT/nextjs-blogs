@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "../../components/Footer";
 import blogs3 from "../../public/frontend/media/blogs1.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Row } from "react-bootstrap";
 // import blogsData from "../../data/blogsData";
 
 // import Image from "next/image";
@@ -13,6 +14,7 @@ import Blog from "../../components/Blog";
 import blogsData from "./../../data/blogsData";
 import axios from "axios";
 import Head from "next/head";
+import { Box } from "@material-ui/core";
 function blogs({ Blogs }) {
   console.log(Blogs);
   return (
@@ -33,24 +35,26 @@ function blogs({ Blogs }) {
             overflow: "hidden",
           }}
         >
-          <div className="row">
-            {Blogs.map((blog) => (
-              <Blog
-                key={blog._id}
-                image={blog.blogImage}
-                blogTitle={blog.blogTitle}
-                auther={blog.blogAutherName}
-                blogDesc={blog.blogDesc}
-                metaDescription={blog.metaDescription}
-                metaTitle={blog.metaTitle}
-                metaKeywords={blog.metaKeywords}
-                imagetitle={blog.images.imageTitle}
-                imageAlt={blog.images.imageAlt}
-                permalink={blog.permalink}
-                createdAT={blog.createdAt}
-              />
-            ))}
-          </div>
+          <Box className="page pt-35" bgcolor="#fff" borderRadius={7}>
+            <Row className="m-0 ">
+              {Blogs.map((blog) => (
+                <Blog
+                  key={blog._id}
+                  image={blog.blogImage}
+                  blogTitle={blog.blogTitle}
+                  auther={blog.blogAutherName}
+                  blogDesc={blog.blogDesc}
+                  metaDescription={blog.metaDescription}
+                  metaTitle={blog.metaTitle}
+                  metaKeywords={blog.metaKeywords}
+                  imagetitle={blog.images.imageTitle}
+                  imageAlt={blog.images.imageAlt}
+                  permalink={blog.permalink}
+                  createdAT={blog.createdAt}
+                />
+              ))}
+            </Row>
+          </Box>
         </div>
       </section>
       <Footer />

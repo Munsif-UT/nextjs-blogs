@@ -121,7 +121,7 @@ function AllblogsEd({
           <div className="article_content">
             <p>
               {ReactHtmlParser(description) &&
-                ReactHtmlParser(description.slice(0, 200))}
+                ReactHtmlParser(description.slice(0, 200) + " ...")}
             </p>
             <div className="read-more">
               <Link

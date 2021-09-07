@@ -6,21 +6,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import BlogDetails from "../../components/BlogDetails";
 import axios from "axios";
 import Head from "next/head";
+import { Box } from "@material-ui/core";
 function BlogDetail({ blogsData }) {
   const [loading, setloading] = useState(false);
-  // const [blogsData, setblogsData] = useState({});
-  // async function fetchSpecificBlog() {
-  //   // console.log(router.query.id);
-  //   const { data } = await axiosNext(
-  //     async (ax) => await ax.get(`/fetchblogs/${router.query.id}`),
-  //     window.localStorage
-  //   );
-  //   setloading(false);
-  //   setblogDetail(data.data);
-  // }
-  // useEffect(() => {
-  //   fetchSpecificBlog();
-  // }, []);
   useEffect(() => {
     setloading(false);
   }, []);
@@ -48,20 +36,22 @@ function BlogDetail({ blogsData }) {
                   overflow: "hidden",
                 }}
               >
-                <div className="row">
-                  {
-                    <BlogDetails
-                      key={blogsData._id}
-                      title={blogsData.blogTitle}
-                      userName={blogsData.blogAutherName}
-                      blogDescription={blogsData.blogDesc}
-                      image={blogsData.blogImage}
-                      imageAlt={blogsData.images.imageAlt}
-                      imageTitle={blogsData.images.imageTitle}
-                      createdAT={blogsData.createdAt}
-                    />
-                  }
-                </div>
+                <Box className="page pt-35" bgcolor="#fff" borderRadius={7}>
+                  <div className="row d-flex justify-content-center ">
+                    {
+                      <BlogDetails
+                        key={blogsData._id}
+                        title={blogsData.blogTitle}
+                        userName={blogsData.blogAutherName}
+                        blogDescription={blogsData.blogDesc}
+                        image={blogsData.blogImage}
+                        imageAlt={blogsData.images.imageAlt}
+                        imageTitle={blogsData.images.imageTitle}
+                        createdAT={blogsData.createdAt}
+                      />
+                    }
+                  </div>
+                </Box>
               </div>
             </section>
             <Footer />
