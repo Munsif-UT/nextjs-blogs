@@ -11,7 +11,7 @@ FROM node:alpine AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
-RUN npm build && npm install
+RUN npm run build && npm install
 
 # Production image, copy all the files and run next
 FROM node:alpine AS runner
@@ -38,4 +38,4 @@ EXPOSE 3005
 # Uncomment the following line in case you want to disable telemetry.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
