@@ -10,6 +10,7 @@ import Link from "next/link";
 import axiosNext from "../../components/axios";
 import axios from "axios";
 import { useRouter } from "next/router";
+
 function Signin() {
   const [togglePassword, setTogglePassword] = useState(true);
   const router = useRouter();
@@ -17,16 +18,18 @@ function Signin() {
   const [pass, setPass] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
   const loginUser = async () => {
-    let data = await axiosNext(
-      async (ax) => await ax.get("/test"),
-      window.localStorage
-    );
-    let loggedin = data.statusText === "OK";
-    console.log(data);
-    setLoggedIn(loggedin);
-    if (loggedin) {
-      router.push("/blogs/editblogs");
-    } else {
+    try {
+      let data = await axiosNext(
+        async (ax) => await ax.get("/test"),
+        window.localStorage
+      );
+      let loggedin = data.statusText === "OK";
+      console.log(data);
+      setLoggedIn(loggedin);
+      if (loggedin) {
+        router.push("/blogs/editblogs");
+      }
+    } catch (error) {
       router.push("/blogs/bloggerauth");
     }
   };

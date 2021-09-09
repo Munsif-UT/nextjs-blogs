@@ -60,7 +60,9 @@ function AllblogsEd({
                 as={`/blogs/editblogs/${blogNo}`}
               >
                 <a>
-                  <button className="btn btn-primary">View</button>
+                  <button color="success" className="btn btn-success">
+                    View
+                  </button>
                 </a>
               </Link>
             </div>
@@ -70,13 +72,18 @@ function AllblogsEd({
                 // as={`/blogs/editblogs/${blogNo}/Edit`}
               >
                 <a>
-                  <button className="btn btn-primary">Edit</button>
+                  <button
+                    className="btn"
+                    style={{ background: "orange", color: "white" }}
+                  >
+                    Edit
+                  </button>
                 </a>
               </Link>
             </div>
             <div className="deleteBlog">
               <Button
-                color="primary"
+                color="danger"
                 type="button"
                 onClick={() => setModalOpen(!modalOpen)}
               >
@@ -93,7 +100,10 @@ function AllblogsEd({
               width={500}
             />
           </div>
-          <h2 className="article_title">
+          <h2
+            className="article_title"
+            style={{ minHeight: "100px", height: "100%" }}
+          >
             <Link href={`/blogs/${blogNo}`}>
               <a className="commonLinkStyle">{title && title.slice(0, 100)}</a>
             </Link>
@@ -102,7 +112,6 @@ function AllblogsEd({
             <ul>
               <li className="d-flex align-items-center">
                 <Person />
-
                 <p>{auther}</p>
               </li>
               <li className="d-flex align-items-center">
@@ -118,10 +127,16 @@ function AllblogsEd({
               </li>
             </ul>
           </div>
-          <div className="article_content">
+          <div
+            className="article_content"
+            style={{ minHeight: "230px", position: "relative" }}
+          >
             <p>
-              {ReactHtmlParser(description) &&
-                ReactHtmlParser(description.slice(0, 200) + " ...")}
+              {ReactHtmlParser(
+                description.length <= 200
+                  ? description
+                  : `${description.slice(0, 200)} ...`
+              )}
             </p>
             <div className="read-more">
               <Link

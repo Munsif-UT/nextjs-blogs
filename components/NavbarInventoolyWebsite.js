@@ -188,7 +188,7 @@ function NavbarInventoolyWebsite() {
                       transition: "0.3s",
                     }}
                   >
-                    Blog
+                    Blogs
                   </a>
                 </Link>
               </li>

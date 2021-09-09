@@ -7,6 +7,7 @@ import BlogDetails from "../../components/BlogDetails";
 import axios from "axios";
 import Head from "next/head";
 import { Box } from "@material-ui/core";
+import Contectus from "../../components/Contectus";
 function BlogDetail({ blogsData }) {
   const [loading, setloading] = useState(false);
   useEffect(() => {
@@ -25,14 +26,17 @@ function BlogDetail({ blogsData }) {
             <meta name="description" content={blogsData.metaDescription} />
             <meta name="keywords" content={blogsData.metaKeywords} />
           </Head>
-          <div className="blog-detail">
+          <div
+            className="blog-detail"
+            style={{ fontFamily: "Nunito, sans-serif" }}
+          >
             <NavbarInventoolyWebsite />
             <section>
               <div
                 className="container d-flex banner-m align-items-center justify-content-centre"
                 style={{
                   minHeight: "100vh",
-                  padding: "150px 0px",
+                  padding: " 150px 0px 0px 0px",
                   overflow: "hidden",
                 }}
               >
@@ -54,6 +58,7 @@ function BlogDetail({ blogsData }) {
                 </Box>
               </div>
             </section>
+            <Contectus />
             <Footer />
           </div>
         </>

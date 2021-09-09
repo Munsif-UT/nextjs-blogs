@@ -15,10 +15,11 @@ import blogsData from "./../../data/blogsData";
 import axios from "axios";
 import Head from "next/head";
 import { Box } from "@material-ui/core";
+import Contectus from "../../components/Contectus";
 function blogs({ Blogs }) {
   console.log(Blogs);
   return (
-    <div className="blogsCont">
+    <div className="blogsCont" style={{fontFamily: "Nunito, sans-serif",}}>
       <Head>
         <title>Inventooly Blog</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -57,6 +58,7 @@ function blogs({ Blogs }) {
           </Box>
         </div>
       </section>
+      <Contectus/>
       <Footer />
     </div>
   );

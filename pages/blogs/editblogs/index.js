@@ -33,9 +33,9 @@ function Allblogs() {
       let loggedin = data.status === 401;
       console.log(data);
       setLoggedIn(loggedin);
-      if (loggedin) {
-        router.push("/blogs/editblogs");
-      }
+      // if (loggedin) {
+      //   router.push("/blogs/editblogs");
+      // }
     } catch (error) {
       router.push("/blogs/bloggerauth");
     }
@@ -67,12 +67,21 @@ function Allblogs() {
 
   return (
     <div className="allblogs_editors">
-      <div className="container">
+      <div className="container position-relative">
         <Box className="mainContEditorPage">
           <div
-            className="logoutBtn top-5"
+            className="logoutBtn "
             style={{ position: "absolute", right: "20px" }}
           >
+            <button
+              style={{ marginLeft: "5px" }}
+              className="btn btn-success "
+              onClick={() => {
+                router.push("/blogs/blogeditor");
+              }}
+            >
+              Add Blog
+            </button>
             <button
               className="btn btn-primary"
               onClick={() => {
@@ -84,7 +93,7 @@ function Allblogs() {
             </button>
           </div>
           <Box className="page pt-35" bgcolor="#fff" borderRadius={7}>
-            <Row className="m-0 ">
+            <Row className="m-0">
               {loading ? (
                 <div className="loading">
                   {/*  <img src="/loading.gif" alt="loading" /> */}

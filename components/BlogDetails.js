@@ -22,11 +22,14 @@ function BlogDetails({
             alt={imageAlt}
             title={imageTitle}
             className="img-fluid"
-            width={400}
-            height={300}
+            width={1024}
+            height={778}
           />
         </div>
-        <h2 className="article_title">
+        <h2
+          className="article_title"
+          style={{ minHeight: "22px", height: "100%" }}
+        >
           {(title && title.slice(0, 100)) ||
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hicdistinctio quibusdam ex."}
         </h2>
@@ -49,7 +52,10 @@ function BlogDetails({
             </li>
           </ul>
         </div>
-        <div className="article_content">
+        <div
+          className="article_content"
+          style={{ padding: "0px 0px 30px 0px" }}
+        >
           <p className="descPara">
             {ReactHtmlParser(blogDescription) ||
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit harum culpa cum reprehenderit quibusdam inventore eaque sequi ipsam,dolores sapiente quam eligendi debitis aperiam eveniet expedita dolorum assumenda facere dolor."}

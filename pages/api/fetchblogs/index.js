@@ -67,7 +67,7 @@ apiRoute.post(async (req, res) => {
 apiRoute.get(async (req, res) => {
   try {
     // ->to check wether user has authentication token
-    await runMiddleware(req, res, authenticateAuthToken);
+    // await runMiddleware(req, res, authenticateAuthToken);
     //   if (req.error) return res.status(401).json(req.error);
     const allblogs = await blogpost.find({});
     return res.status(200).json({ allblogs });

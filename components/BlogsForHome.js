@@ -19,7 +19,13 @@ function BlogsForHome({ blogNo, date, title, image }) {
           height: "100%",
         }}
       >
-        <Image src={image || blogs1} alt="" />
+        <Image
+          src={`/uploads/${image}` || blogs3}
+          alt={""}
+          title={""}
+          width={1024}
+          height={778}
+        />
         <div
           className="Image-overlay blogOverlay"
           style={{
@@ -28,20 +34,15 @@ function BlogsForHome({ blogNo, date, title, image }) {
             padding: "20px 20px 0px 20px",
           }}
         >
-          <span
-            className="blogDate"
-            style={{
-              fontSize: "16px",
-              fontWeight: "600",
-              color: "rgba(1, 41, 112, 0.6)",
-              display: "block",
-              marginBottom: "10px",
-            }}
-          >
-            {date || "Mon, Jan 15"}
+          <span className="blogDate">
+            {new Date(date).toLocaleString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            }) || "2/06/2021"}
           </span>
-          <p
-            className="blogPara"
+          <h2
+            className="blogParaHome"
             style={{
               bottom: "0",
               marginBottom: "10px",
@@ -49,18 +50,13 @@ function BlogsForHome({ blogNo, date, title, image }) {
           >
             {title ||
               "Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis"}
-          </p>
+          </h2>
           <a
-            style={{
-              position: "absolute",
-              bottom: "0",
-              marginBottom: "10px",
-            }}
             href={`/blogs/${blogNo}`}
             className="blogReadmore readMorePositionFixed stretched-link "
           >
             Read More
-            <ArrowRight />
+            <ArrowRight style={{ marginLeft: "5px" }} />
           </a>
         </div>
       </div>

@@ -248,7 +248,9 @@ function Footer() {
                     >
                       <ArrowRight />
                       <Link href="/#top">
-                        <a style={{ color: "#013298" }}>Home</a>
+                        <a style={{ color: "#013298", textDecoration: "none" }}>
+                          Home
+                        </a>
                       </Link>
                     </li>
                     <li
@@ -260,7 +262,9 @@ function Footer() {
                     >
                       <ArrowRight />
                       <Link href="/#About">
-                        <a style={{ color: "#013298" }}>About Us</a>
+                        <a style={{ color: "#013298", textDecoration: "none" }}>
+                          About Us
+                        </a>
                       </Link>
                     </li>
 
@@ -273,7 +277,9 @@ function Footer() {
                     >
                       <ArrowRight />
                       <Link href="/terms-of-service">
-                        <a style={{ color: "#013298" }}>Terms of service</a>
+                        <a style={{ color: "#013298", textDecoration: "none" }}>
+                          Terms of service
+                        </a>
                       </Link>
                     </li>
                     <li
@@ -307,7 +313,7 @@ function Footer() {
                   <p>
                     490 Wheeler Road Suite#220, Hauppauge New York 11788 <br />
                     <br />
-                    <strong>Phone:</strong> +1 631-993-8899
+                    <strong>Phone:</strong> +1 (888) 928-4079
                     <br />
                     <strong>Email:</strong> support@inventooly.com
                   </p>
