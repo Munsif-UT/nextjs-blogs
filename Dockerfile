@@ -1,19 +1,28 @@
-FROM node:14
+# Base on offical Node.js Alpine image
+FROM node:alpine
 
-# Create app directory
-WORKDIR /app
+# Set working directory
+WORKDIR /usr/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+# Copy package.json and package-lock.json before other files
+# Utilise Docker cache to save re-installing dependencies if unchanged
+COPY ./package*.json ./
 
-RUN yarn
+# Install dependencies
+RUN npm install --production
 
-# Bundle app source
-COPY . .
+# Copy all files
+COPY ./ ./
 
+# Build app
 RUN npm run build
 
-EXPOSE 80
-CMD ["npm","run","start"]
+# Expose the listening port
+EXPOSE 3000
+
+# Run container as non-root (unprivileged) user
+# The node user is provided in the Node.js Alpine base image
+USER node
+
+# Run npm start script when container starts
+CMD [ "npm", "start" ]
