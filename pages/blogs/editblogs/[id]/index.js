@@ -120,7 +120,7 @@ function EditSpecificBlog({ blogDetail }) {
                       width: "12%",
                       right: "12px",
                       top: "12px",
-                      zIndex: "-1",
+                      background:"transparent"
                     }}
                   >
                     <div className="editBlog">

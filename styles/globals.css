@@ -460,7 +460,7 @@ a {
 .blogEditButtons {
   display: flex;
   position: absolute;
-  background: transparent;
+  z-index: 1;
   right: 13px;
   bottom: 16px;
   justify-content: space-between;
