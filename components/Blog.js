@@ -10,13 +10,13 @@ function Blog({
   blogTitle,
   auther,
   imageAlt,
-  blogDesc = "dsfa",
+  blogDesc,
   permalink,
   imagetitle,
   createdAT,
 }) {
   return (
-    <div className="col-md-6">
+    <div className="col-md-4 col-sm-6">
       <article className="article">
         <div className="article_image">
           <Image
@@ -24,14 +24,14 @@ function Blog({
             alt={imageAlt}
             title={imagetitle}
             className="img-fluid"
-            width={400}
-            height={300}
+            width={500}
+            height={350}
           />
         </div>
-        <h2 className="article_title">
+        <h2 className="article_title" style={{ minHeight: "100px" }}>
           <Link href={`/blogs/${permalink}`}>
             <a className="commonLinkStyle">
-              {(blogTitle && blogTitle.slice(0, 100)) ||
+              {blogTitle.slice(0, 50) ||
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hicdistinctio quibusdam ex."}
             </a>
           </Link>
@@ -52,16 +52,18 @@ function Blog({
                 }) || "2/06/2021"}
               </p>
             </li>
-            {/* <li className="d-flex align-items-center">
-              <ChatDots />
-              <p>{comments || "blog.comments"}</p>
-            </li> */}
           </ul>
         </div>
-        <div className="article_content">
+        <div
+          className="article_content"
+          style={{ minHeight: "230px", position: "relative" }}
+        >
           <p>
-            {(ReactHtmlParser(blogDesc) &&
-              ReactHtmlParser(blogDesc.slice(0, 200))) ||
+            {ReactHtmlParser(
+              blogDesc.length <= 200
+                ? blogDesc
+                : `${blogDesc.slice(0, 200)} ...`
+            ) ||
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit harum culpa cum reprehenderit quibusdam inventore eaque sequi ipsam,dolores sapiente quam eligendi debitis aperiam eveniet expedita dolorum assumenda facere dolor."}
           </p>
           <div className="read-more">

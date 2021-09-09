@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import ReactHtmlParser from "react-html-parser";
+import "antd/dist/antd.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 function EditSpecificBlog({ blogDetail }) {
   console.log(blogDetail);
   const router = useRouter();
@@ -21,6 +23,27 @@ function EditSpecificBlog({ blogDetail }) {
   //   setloading(false);
   //   setblogDetail(data.data);
   // }
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const loginUser = async () => {
+    try {
+      let data = await axiosNext(
+        async (ax) => await ax.get("/test"),
+        window.localStorage
+      );
+      let loggedin = data.status === 401;
+      console.log(data);
+      setLoggedIn(loggedin);
+      // if (loggedin) {
+      //   router.push(`/blogs/editblogs/${blog}`);
+      // }
+    } catch (error) {
+      router.push("/blogs/bloggerauth");
+    }
+  };
+  useEffect(() => {
+    loginUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [modalOpen, setModalOpen] = React.useState(false);
   async function deleteBLog(id) {
     console.log(id);
@@ -84,20 +107,37 @@ function EditSpecificBlog({ blogDetail }) {
               overflow: "hidden",
             }}
           >
-            <div className="row">
-              <div className="col-md-6">
-                <article className="article" style={{ position: "relative" }}>
-                  <div className="blogEditButtons">
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-10">
+                <article
+                  className="article"
+                  style={{ position: "relative", height: "100%" }}
+                >
+                  <div
+                    className="blogEditButtons"
+                    style={{
+                      position: "absolute",
+                      width: "12%",
+                      right: "12px",
+                      top: "12px",
+                      zIndex: "-1",
+                    }}
+                  >
                     <div className="editBlog">
                       <Link href={`/blogs/editblogs/${blogDetail._id}/Edit`}>
                         <a>
-                          <button className="btn btn-primary">Edit</button>
+                          <button
+                            className="btn"
+                            style={{ background: "orange", color: "white" }}
+                          >
+                            Edit
+                          </button>
                         </a>
                       </Link>
                     </div>
                     <div className="deleteBlog">
                       <Button
-                        color="primary"
+                        color="danger"
                         type="button"
                         onClick={() => setModalOpen(!modalOpen)}
                       >

@@ -23,8 +23,6 @@ const uploadMiddleware = upload.single("blogImage");
 apiRoute.use(uploadMiddleware);
 apiRoute.post(async (req, res) => {
   try {
-    console.log(req.body);
-    console.log(req.file.originalname);
     const {
       blogauthername,
       blogtitile,
@@ -36,7 +34,6 @@ apiRoute.post(async (req, res) => {
       metatitle,
       permalink,
     } = req.body;
-    // console.log(blogImage.originalname);
     const note = await blogpost.create({
       metaTitle: metatitle,
       metaDescription: metaDesc,
@@ -67,7 +64,7 @@ apiRoute.post(async (req, res) => {
 apiRoute.get(async (req, res) => {
   try {
     // ->to check wether user has authentication token
-    await runMiddleware(req, res, authenticateAuthToken);
+    // await runMiddleware(req, res, authenticateAuthToken);
     //   if (req.error) return res.status(401).json(req.error);
     const allblogs = await blogpost.find({});
     return res.status(200).json({ allblogs });

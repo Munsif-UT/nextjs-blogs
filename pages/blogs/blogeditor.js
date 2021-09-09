@@ -28,21 +28,24 @@ function Avatar() {
   const [ckeditorContent, setCkeditorContent] = useState("");
   const [image, setImage] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
-  async function blogEditor() {
-    let data = await axiosNext(
-      async (ax) => await ax.get("/test"),
-      window.localStorage
-    );
-    let loggedin = data.statusText === "OK";
-    setLoggedIn(loggedin);
-    if (loggedin) {
-      router.push("/blogs/blogeditor");
-    } else {
+  const loginUser = async () => {
+    try {
+      let data = await axiosNext(
+        async (ax) => await ax.get("/test"),
+        window.localStorage
+      );
+      let loggedin = data.status === 401;
+      console.log(data);
+      setLoggedIn(loggedin);
+      // if (loggedin) {
+      //   router.push("/blogs/editblogs");
+      // }
+    } catch (error) {
       router.push("/blogs/bloggerauth");
     }
-  }
+  };
   useEffect(() => {
-    blogEditor();
+    loginUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const onFinish = async (values) => {
@@ -62,6 +65,12 @@ function Avatar() {
       async () => await axios.post("/fetchblogs", formData),
       window.localStorage
     );
+    if (data.success) {
+      alert("data inserted");
+      router.push("/blogs/editblogs");
+    } else {
+      alert("data not inserted");
+    }
     console.log(data);
   };
   function onChange(evt) {
@@ -72,7 +81,10 @@ function Avatar() {
   return (
     <div
       className="blogeditor"
-      style={{ background: `url("/frontend/media/wave.svg")` }}
+      style={{
+        background: `url("/frontend/media/wave.svg")`,
+        fontFamily: "Nunito, sans-serif",
+      }}
     >
       <NavbarInventoolyWebsite />
       <div className="container">
@@ -80,6 +92,7 @@ function Avatar() {
           <Box className="page pt-35" bgcolor="#fff" borderRadius={7}>
             <Row className="m-0 d-flex justify-content-center align-items-center">
               <div className="col-md-10 formWrapper">
+                <h1 className="editPageTitile">New Blog</h1>
                 <Form
                   {...layout}
                   name="nest-messages"
@@ -93,11 +106,13 @@ function Avatar() {
                     borderRadius={7}
                   >
                     <div className="formImageAndValues">
-                      <input
-                        type="file"
-                        filename="blogImage"
-                        onChange={(e) => setImage(e.target.files[0])}
-                      />
+                      <Form.Item label="Blog Image">
+                        <input
+                          type="file"
+                          filename="blogImage"
+                          onChange={(e) => setImage(e.target.files[0])}
+                        />
+                      </Form.Item>
                       {/* </Form.Item> */}
                       <div className="formOptions">
                         <Form.Item

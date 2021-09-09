@@ -25,8 +25,6 @@ apiRoute.put(async (req, res) => {
   try {
     // await runMiddleware(req, res, authenticateAuthToken);
     const { id } = req.query;
-    console.log("sdssdsdsdsds");
-    console.log(req.body);
     const {
       blogauthername,
       blogtitile,
@@ -38,36 +36,67 @@ apiRoute.put(async (req, res) => {
       metatitle,
       permalink,
     } = req.body;
-    console.log(req.body);
-    const blog = await blogpost.findByIdAndUpdate(
-      id,
-      {
-        metaTitle: metatitle,
-        metaDescription: metaDesc,
-        metaKeywords: metakeywords,
-        blogTitle: blogtitile,
-        permalink,
-        blogImage: req.file.originalname,
-        blogDesc: ckEditorValue,
-        images: {
-          imageAlt,
-          imageTitle: imagetitle,
+    var blog;
+
+    if (req.file || req.files) {
+      blog = await blogpost.findByIdAndUpdate(
+        id,
+        {
+          metaTitle: metatitle,
+          metaDescription: metaDesc,
+          metaKeywords: metakeywords,
+          blogTitle: blogtitile,
+          permalink,
+          blogImage: req.file.originalname,
+          blogDesc: ckEditorValue,
+          images: {
+            imageAlt,
+            imageTitle: imagetitle,
+          },
+          blogAutherName: blogauthername,
         },
-        blogAutherName: blogauthername,
-      },
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-    console.log(blog);
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    } else {
+      blog = await blogpost.findByIdAndUpdate(
+        id,
+        {
+          metaTitle: metatitle,
+          metaDescription: metaDesc,
+          metaKeywords: metakeywords,
+          blogTitle: blogtitile,
+          permalink,
+          // blogImage: req.file.originalname,
+          blogDesc: ckEditorValue,
+          images: {
+            imageAlt,
+            imageTitle: imagetitle,
+          },
+          blogAutherName: blogauthername,
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    }
+
     if (!blog) {
-      return res.status(400).json({ success: false });
+      return res.status(400).json({ success: false, data: "not found" });
     }
 
     res.status(200).json({ success: true, data: blog });
   } catch (error) {
-    res.status(400).json({ success: false });
+    res
+      .status(400)
+      .json({
+        success: false,
+        data: "not found in catc",
+        errors: error.message,
+      });
   }
 });
 apiRoute.get(async (req, res) => {

@@ -2,6 +2,7 @@
 // import { runMiddleware } from "../../../middlewares/runMiddleware";
 // import passport from 'passport'
 import blogpost from "../../../models/blogpost";
+console.log("blogpost", process.env.DEV_APP);
 export default async function handler(req, res) {
   const { method } = req;
   switch (method) {

@@ -2,15 +2,7 @@ import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  ArrowRight,
-  Clock,
-  Telephone,
-  GeoAlt,
-  Envelope,
-} from "react-bootstrap-icons";
 // import { role } from "../../enumerations";
-import { Form as FormAntd, Button } from "antd";
 // import { isEmpty } from "lodash";
 import { useHistory } from "react-router-dom";
 // import { onContactForm } from "../../features/authSlice";
@@ -46,16 +38,22 @@ import NavigationPreloadManager from "../components/NavbarInventoolyWebsite";
 import Footer from "../components/Footer";
 import BlogsForHome from "../components/BlogsForHome";
 import blogsData from "./../data/blogsData";
+import Contectus from "../components/Contectus";
+import Link from "next/link";
+import checkStatus from "../config/checkStatus";
 
 const isValidEmail = (email) => {
   const re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 };
-const Home = () => {
+const Home = ({ HomeBlogs }) => {
+  const [HomeBlogsState, setHomeBlogsState] = useState(HomeBlogs);
+  const homeBlogsCopy = HomeBlogsState.slice(0, 3);
   const blogsDataCopy = blogsData.map((blog) => blog);
   blogsDataCopy.length = 3; //to get only first 3 values of array
   //navbar scroll when active state
+  const URL = checkStatus();
   const history = useHistory();
   // const dispatch = useDispatch();
   const [navbar, setNavbar] = useState(false);
@@ -112,7 +110,6 @@ const Home = () => {
 
   //navbar scroll changeBackground function
   const changeBackground = () => {
-    // console.log(window.scrollY)
     if (window.scrollY >= 66) {
       setNavbar(true);
     } else {
@@ -133,15 +130,6 @@ const Home = () => {
     // adding the event when scroll change background
     window.addEventListener("scroll", changeBackground);
   });
-  useEffect(
-    () => {
-      // dispatch(checkToken());
-    },
-    [
-      /* dispatch */
-    ]
-  );
-  // chatbot("https://embed.tawk.to/60e71436d6e7610a49aa494e/1fa3adtm9");
   return (
     <div
       className="fhomepage"
@@ -204,24 +192,23 @@ const Home = () => {
                 your stock levels and provides out-of-the-box supply chain
                 management that creates a smooth, consistent cash flow.
               </h2>
-              <a
-                onClick={() => {
-                  history.push("/onboard");
-                }}
-                className="btn  btnMain"
-                style={{
-                  marginTop: "20px",
-                  lineHeight: "0",
-                  padding: "30px 50px",
-                  borderRadius: "4px",
-                  transition: "0.5s",
-                  color: "#fff ",
-                  background: "#4154f1",
-                  boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                }}
-              >
-                Get Started For Free
-              </a>
+              <Link href={`${URL}onboard`}>
+                <a
+                  className="btn  btnMain"
+                  style={{
+                    marginTop: "20px",
+                    lineHeight: "0",
+                    padding: "30px 50px",
+                    borderRadius: "4px",
+                    transition: "0.5s",
+                    color: "#fff ",
+                    background: "#4154f1",
+                    boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                  }}
+                >
+                  Get Started For Free
+                </a>
+              </Link>
             </div>
             <div className="col-lg-6 col-md-5">
               <Image
@@ -289,24 +276,23 @@ const Home = () => {
                 provides you with all the insights of your business, so that you
                 never miss out on an opportunity. <p />
                 {/* <button class="btn  btn-lg btnMain">Why Inventooly?</button> */}
-                <a
-                  onClick={() => {
-                    history.push("/onboard");
-                  }}
-                  className="btn  btnMain"
-                  style={{
-                    marginTop: "20px",
-                    lineHeight: "0",
-                    padding: "30px 50px",
-                    borderRadius: "4px",
-                    transition: "0.5s",
-                    color: "#fff",
-                    background: "#4154f1",
-                    boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                  }}
-                >
-                  Get Started For Free
-                </a>
+                <Link href={`${URL}onboard`}>
+                  <a
+                    className="btn  btnMain"
+                    style={{
+                      marginTop: "20px",
+                      lineHeight: "0",
+                      padding: "30px 50px",
+                      borderRadius: "4px",
+                      transition: "0.5s",
+                      color: "#fff",
+                      background: "#4154f1",
+                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                    }}
+                  >
+                    Get Started For Free
+                  </a>
+                </Link>
               </h2>
             </div>
             <div className="col-md-6 text-center">
@@ -518,15 +504,11 @@ const Home = () => {
                   <div className="content-b">
                     <h3 style={{ marginBottom: "0px;" }}>GET EARLY ACCESS </h3>
                     <p style={{ marginBottom: "0px;" }}>First 800 Users only</p>
-                    <a
-                      onClick={() => {
-                        history.push("/onboard");
-                      }}
-                      className="btn "
-                      style={{ width: "300px" }}
-                    >
-                      Get Started For Free
-                    </a>
+                    <Link href={`${URL}onboard`}>
+                      <a className="btn " style={{ width: "300px" }}>
+                        Get Started For Free
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -597,24 +579,25 @@ const Home = () => {
                   to help you keep track of your inventory, even with your eyes
                   shut. Automated analysis and powerful insights make it a more
                   effective way to stay on top of your inventory. <p />
-                  <button
-                    onClick={() => {
-                      history.push("/onboard");
-                    }}
-                    className="btn btnMain"
-                    style={{
-                      marginTop: "20px",
-                      lineHeight: "0",
-                      padding: "30px 50px ",
-                      borderRadius: "4px",
-                      transition: "0.5s",
-                      color: "#fff ",
-                      background: "#4154f1",
-                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                    }}
-                  >
-                    Get Started For Free
-                  </button>
+                  <Link href={`${URL}onboard`}>
+                    <a>
+                      <button
+                        className="btn btnMain"
+                        style={{
+                          marginTop: "20px",
+                          lineHeight: "0",
+                          padding: "30px 50px ",
+                          borderRadius: "4px",
+                          transition: "0.5s",
+                          color: "#fff ",
+                          background: "#4154f1",
+                          boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                        }}
+                      >
+                        Get Started For Free
+                      </button>
+                    </a>
+                  </Link>
                 </h2>
               </div>
               <div className="col-md-6 text-center content-vertical">
@@ -661,24 +644,25 @@ const Home = () => {
                   month with Inventooly’s automated re-ordering process.
                   Advanced algorithms analyze the sales forecast for thousands
                   of products in minutes. <p />
-                  <button
-                    onClick={() => {
-                      history.push("/onboard");
-                    }}
-                    className="btn btnMain"
-                    style={{
-                      marginTop: "20px",
-                      lineHeight: "0",
-                      padding: "30px 50px ",
-                      borderRadius: "4px",
-                      transition: "0.5s",
-                      color: "#fff ",
-                      background: "#4154f1 ",
-                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                    }}
-                  >
-                    Get Started For Free
-                  </button>
+                  <Link href={`${URL}onboard`}>
+                    <a>
+                      <button
+                        className="btn btnMain"
+                        style={{
+                          marginTop: "20px",
+                          lineHeight: "0",
+                          padding: "30px 50px ",
+                          borderRadius: "4px",
+                          transition: "0.5s",
+                          color: "#fff ",
+                          background: "#4154f1 ",
+                          boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                        }}
+                      >
+                        Get Started For Free
+                      </button>
+                    </a>
+                  </Link>
                 </h2>
               </div>
             </div>
@@ -719,24 +703,25 @@ const Home = () => {
                   Inventooly’s one-click system sends purchase orders directly
                   to your suppliers and helps you keep track of outstanding and
                   completed POs. <p />
-                  <button
-                    onClick={() => {
-                      history.push("/onboard");
-                    }}
-                    className="btn btnMain"
-                    style={{
-                      marginTop: "20px",
-                      lineHeight: "0",
-                      padding: "30px 50px ",
-                      borderRadius: "4px",
-                      transition: "0.5s",
-                      color: "#fff ",
-                      background: "#4154f1 ",
-                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                    }}
-                  >
-                    Get Started For Free
-                  </button>
+                  <Link href={`${URL}onboard`}>
+                    <a>
+                      <button
+                        className="btn btnMain"
+                        style={{
+                          marginTop: "20px",
+                          lineHeight: "0",
+                          padding: "30px 50px ",
+                          borderRadius: "4px",
+                          transition: "0.5s",
+                          color: "#fff ",
+                          background: "#4154f1 ",
+                          boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                        }}
+                      >
+                        Get Started For Free
+                      </button>
+                    </a>
+                  </Link>
                 </h2>
               </div>
               <div className="col-md-6 text-center content-vertical">
@@ -783,24 +768,25 @@ const Home = () => {
                   headache. Inventooly lets you combine insights from each
                   channel in one central dashboard so you can reorder products
                   based on their overall performance. <p />
-                  <button
-                    onClick={() => {
-                      history.push("/onboard");
-                    }}
-                    className="btn btnMain"
-                    style={{
-                      marginTop: "20px",
-                      lineHeight: "0",
-                      padding: "30px 50px ",
-                      borderRadius: "4px",
-                      transition: "0.5s",
-                      color: "#fff ",
-                      background: "#4154f1",
-                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                    }}
-                  >
-                    Get Started For Free
-                  </button>
+                  <Link href={`${URL}onboard`}>
+                    <a>
+                      <button
+                        className="btn btnMain"
+                        style={{
+                          marginTop: "20px",
+                          lineHeight: "0",
+                          padding: "30px 50px ",
+                          borderRadius: "4px",
+                          transition: "0.5s",
+                          color: "#fff ",
+                          background: "#4154f1",
+                          boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                        }}
+                      >
+                        Get Started For Free
+                      </button>
+                    </a>
+                  </Link>
                 </h2>
               </div>
             </div>
@@ -815,15 +801,11 @@ const Home = () => {
                   <div className="content-b">
                     <h3 style={{ marginBottom: "0px;" }}>GET EARLY ACCESS </h3>
                     <p style={{ marginBottom: "0px;" }}>First 800 Users only</p>
-                    <a
-                      onClick={() => {
-                        history.push("/onboard");
-                      }}
-                      className="btn "
-                      style={{ width: "300px" }}
-                    >
-                      Get Started For Free
-                    </a>
+                    <Link href={`${URL}onboard`}>
+                      <a className="btn " style={{ width: "300px" }}>
+                        Get Started For Free
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -1071,302 +1053,42 @@ const Home = () => {
           </div>
           <div className="container">
             <div className="row rowHeight">
-              {blogsDataCopy.map((blog) => (
+              {homeBlogsCopy.map((blog) => (
                 <BlogsForHome
-                  key={blog.blogNo}
-                  date={blog.date}
-                  title={blog.title}
-                  blogNo={blog.blogNo}
-                  image={blog.image}
+                  key={blog._id}
+                  date={blog.createdAt}
+                  title={blog.blogTitle}
+                  blogNo={blog.permalink}
+                  image={blog.blogImage}
                 />
               ))}
             </div>
           </div>
         </section>
-        <section
-          id="Contact"
-          style={{
-            background: "#fff",
-            padding: "60px 0px",
-            overflow: "hidden",
-            textAlign: "center",
-          }}
-        >
-          <div className="container">
-            <p
-              style={{
-                color: "#072371",
-                fontSize: "48px",
-                fontWeight: 700,
-              }}
-            >
-              Contact Us
-            </p>
-            <div className="row gy-4">
-              <div className="col-lg-6">
-                <div className="row gy-4">
-                  <div className="col-md-6">
-                    <div
-                      className="info-box"
-                      style={{
-                        color: "#444444",
-                        background: "#fafbff",
-                        padding: "20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <GeoAlt
-                        style={{
-                          color: "#4154f1",
-                          lineHeight: "0px",
-                          fontSize: "38px",
-                        }}
-                      />
-                      <h3
-                        style={{
-                          fontSize: "20px",
-                          color: "#012970",
-                          fontWeight: "700",
-                          margin: "20px 0 10px 0",
-                        }}
-                      >
-                        Address
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          color: "#57646b",
-                        }}
-                      >
-                        490 Wheeler Road Suite#220, <br />
-                        Hauppauge New York, NY 535022 US.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div
-                      className=" info-box"
-                      style={{
-                        color: "#444444",
-                        background: "#fafbff",
-                        padding: "20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <Telephone
-                        style={{
-                          color: "#4154f1",
-                          lineHeight: "0px",
-                          fontSize: "38px",
-                        }}
-                      />
-                      <h3
-                        style={{
-                          fontSize: "20px",
-                          color: "#012970",
-                          fontWeight: "700",
-                          margin: "20px 0 10px 0",
-                        }}
-                      >
-                        Call Us
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          color: "#57646b",
-                        }}
-                      >
-                        {" "}
-                        +1 631-993-8899
-                        <br />
-                        <br />
-                        <br />
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-6" style={{ marginTop: "20px" }}>
-                    <div
-                      className=" info-box"
-                      style={{
-                        color: "#444444",
-                        background: "#fafbff",
-                        padding: "20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <Envelope
-                        style={{
-                          color: "#4154f1",
-                          lineHeight: "0px",
-                          fontSize: "38px",
-                        }}
-                      />
-                      <h3
-                        style={{
-                          fontSize: "20px",
-                          color: "#012970",
-                          fontWeight: "700",
-                          margin: "20px 0 10px 0",
-                        }}
-                      >
-                        Email
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          color: "#57646b",
-                        }}
-                      >
-                        support@inventooly.com
-                        <br />
-                        <br />
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-6" style={{ marginTop: "20px" }}>
-                    <div
-                      className=" info-box"
-                      style={{
-                        color: "#444444",
-                        background: "#fafbff",
-                        padding: "20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <Clock
-                        className="bi bi-envelope"
-                        style={{
-                          color: "#4154f1",
-                          lineHeight: "0px",
-                          fontSize: "38px",
-                        }}
-                      />
-                      <h3
-                        style={{
-                          fontSize: "20px",
-                          color: "#012970",
-                          fontWeight: "700",
-                          margin: "20px 0 10px 0",
-                        }}
-                      >
-                        Open Hours
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          color: "#57646b",
-                        }}
-                      >
-                        Monday - Friday <br />
-                        9:00AM - 05:00PM
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="col-lg-6 contact"
-                style={{
-                  background: "rgb(250, 251, 255)",
-                  color: "#444444",
-                  padding: "30px",
-                }}
-              >
-                <form>
-                  <div className="row gy-4">
-                    <div className="col-md-6">
-                      <input
-                        value={name}
-                        onChange={(event) => {
-                          setName(event.target.value);
-                          setErrors({});
-                        }}
-                        type="text"
-                        name="name"
-                        className="form-control"
-                        placeholder="Your Name"
-                        required
-                      />
-                    </div>
-                    <div className="col-md-6">
-                      <input
-                        value={email}
-                        onChange={(event) => {
-                          setEmail(event.target.value);
-                          setErrors({});
-                        }}
-                        type="text"
-                        name="email"
-                        className="form-control"
-                        placeholder="Your Email"
-                        required
-                      />
-                    </div>
-                    <div className="col-md-12" style={{ marginTop: "20px" }}>
-                      <input
-                        value={subject}
-                        onChange={(event) => {
-                          setSubject(event.target.value);
-                          setErrors({});
-                        }}
-                        type="text"
-                        name="subject"
-                        className="form-control"
-                        placeholder="Subject"
-                        required
-                      />
-                    </div>
-                    <div className="col-md-12" style={{ marginTop: "20px" }}>
-                      <textarea
-                        value={message}
-                        onChange={(event) => {
-                          setMessage(event.target.value);
-                          setErrors({});
-                        }}
-                        className="form-control"
-                        name="message"
-                        rows={6}
-                        placeholder="Message"
-                        required
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          height: "163px",
-                        }}
-                        defaultValue={""}
-                      />
-                    </div>
-                    <div
-                      className="col-md-12 text-center"
-                      style={{ marginTop: "20px" }}
-                    >
-                      <Button
-                        loading={""}
-                        type="button"
-                        onClick={submitData}
-                        style={{
-                          background: "#4154f1",
-                          border: "0",
-                          padding: "6px 30px",
-                          color: "#fff",
-                          transition: "0.4s",
-                          borderRadius: "4px",
-                        }}
-                      >
-                        {" "}
-                        Send Message
-                      </Button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Contect us */}
+        <Contectus />
         <Footer />
       </main>
     </div>
   );
 };
-
 export default Home;
+export async function getServerSideProps() {
+  // const { data } = await axios.get("/getblogs");
+  const res = await fetch(
+    `${
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/api/getblogs"
+        : "https://app.inventooly.com/api/getblogs"
+    }`,
+    {
+      method: "GET",
+    }
+  );
+  const data = await res.json();
+  return {
+    props: {
+      HomeBlogs: data.allblogs,
+    },
+  };
+}
