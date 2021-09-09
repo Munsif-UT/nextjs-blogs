@@ -8,6 +8,7 @@ import {
   List,
 } from "react-bootstrap-icons";
 import { useHistory } from "react-router-dom";
+import Link from "next/link";
 // import “bootstrap/dist/css/bootstrap.min.css”;
 // import blogs from "../../assets/frontend/media/logo_final-svg.png";
 import { useSelector } from "react-redux";
@@ -30,9 +31,10 @@ import img2 from "../public/web-banner-urtasker-2.jpg";
 import img3 from "../public/web-banner-urtasker-3.jpg";
 import Footer from "../components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import checkStatus from "../config/checkStatus";
 import Image from "next/image";
 const FrontFeatures = () => {
+  const URL = checkStatus();
   //   chatbot("https://embed.tawk.to/60e71436d6e7610a49aa494e/1fa3adtm9");
   //navbar scroll when active state
 
@@ -65,12 +67,13 @@ const FrontFeatures = () => {
                 Reinvent supply chain management, seize market-ready
                 opportunities, and optimize your entire inventory system with
                 simple, clever, and intuitive software. <p />
-                <button
-                  className="btn btn-lg btnMainFeatures"
-                  onClick={() => history.push("/onboard")}
-                >
-                  Get Started for Free
-                </button>
+                <Link href={`${URL}onboard`}>
+                  <a>
+                    <button className="btn btn-lg btnMainFeatures">
+                      Get Started for Free
+                    </button>
+                  </a>
+                </Link>
               </h2>
             </div>
             <div className="col-md-6">
@@ -298,13 +301,11 @@ const FrontFeatures = () => {
                   <div className="content-b">
                     <h3 style={{ marginBottom: "0px;" }}>GET EARLY ACCESS </h3>
                     <p style={{ marginBottom: "0px;" }}>First 800 Users only</p>
-                    <a
-                      href="/onboard"
-                      className="btn "
-                      style={{ width: "300px" }}
-                    >
-                      Get Started For Free
-                    </a>
+                    <Link href={`${URL}onboard`}>
+                      <a className="btn " style={{ width: "300px" }}>
+                        Get Started For Free
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>

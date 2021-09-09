@@ -74,7 +74,7 @@ function Allblogs() {
             style={{ position: "absolute", right: "20px" }}
           >
             <button
-              style={{ marginLeft: "5px" }}
+              style={{ marginRight: "5px" }}
               className="btn btn-success "
               onClick={() => {
                 router.push("/blogs/blogeditor");

@@ -303,9 +303,8 @@ function Contectus() {
                   style={{ marginTop: "20px" }}
                 >
                   <Button
-                    loading={""}
                     type="button"
-                    onClick={submitData}
+                    // onClick={submitData}
                     style={{
                       background: "#4154f1",
                       border: "0",

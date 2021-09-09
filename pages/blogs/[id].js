@@ -71,11 +71,19 @@ BlogDetail.getInitialProps = async (context) => {
   // if (!context.req) {
   //   return {
   //     blogsData: {},
+
   //   };
   // }
-  const res = await fetch(`http://localhost:3000/api/getblogs/${query.id}`, {
-    method: "GET",
-  });
+  const res = await fetch(
+    `${
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:3000/api/getblogs/${query.id}`
+        : "https://app.inventooly.com/api/getblogs"
+    }`,
+    {
+      method: "GET",
+    }
+  );
   const { data } = await res.json();
   console.log(data);
   return { blogsData: data };

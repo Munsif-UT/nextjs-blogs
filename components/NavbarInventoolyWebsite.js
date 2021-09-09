@@ -5,12 +5,12 @@ import { List } from "react-bootstrap-icons";
 import { useHistory } from "react-router-dom";
 import Image from "next/image";
 import Link from "next/link";
+import checkStatus from "../config/checkStatus";
 function NavbarInventoolyWebsite() {
+  const URL = checkStatus();
   const history = useHistory();
   const [navbarcollapse, setNavbarcollapse] = useState(false);
   const [navbar, setNavbar] = useState(false);
-
-  // const { isLogged, userRole } = useSelector((state) => state.auth);
   const changeBackground = () => {
     // console.log(window.scrollY)
     if (window.scrollY >= 66) {
@@ -19,7 +19,6 @@ function NavbarInventoolyWebsite() {
       setNavbar(false);
     }
   };
-
   const mobilenavbar = () => {
     if (navbarcollapse) {
       setNavbarcollapse(false);
@@ -53,14 +52,14 @@ function NavbarInventoolyWebsite() {
             }}
           >
             <Image
+              style={{ marginRight: "6px", marginTop: "15px", padding: "10px" }}
               src="/frontend/media/logo_final-svg.png"
-              style={{ marginRight: "6px", marginTop: "5px" }}
               alt=""
               width={30}
               height={30}
               className="d-inline-block align-text-top"
             />
-            Inventooly
+            <span style={{ marginLeft: "6px" }}>Inventooly</span>
           </a>
         </Link>
         <button
@@ -124,7 +123,7 @@ function NavbarInventoolyWebsite() {
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <Link href="#Pricing">
+                <Link href="/#Pricing">
                   <a
                     className="nav-link"
                     style={{
@@ -148,7 +147,7 @@ function NavbarInventoolyWebsite() {
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <Link href="#Contact">
+                <Link href="/#Contact">
                   <a
                     className="nav-link"
                     style={{
@@ -199,7 +198,7 @@ function NavbarInventoolyWebsite() {
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <Link href="/signin">
+                <Link href={`${URL}signin`}>
                   <a
                     className="nav-link"
                     style={{
@@ -223,7 +222,7 @@ function NavbarInventoolyWebsite() {
                 className="nav-item li-Nav"
                 style={{ alignItems: "right", paddingLeft: "15px" }}
               >
-                <Link href="/onboard">
+                <Link href={`${URL}onboard`}>
                   <a
                     className="nav-link"
                     onClick={() => {
@@ -254,10 +253,9 @@ function NavbarInventoolyWebsite() {
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <Link href={"/signin?demo=true"}>
+                <Link href={`${URL}signin?demo=true`}>
                   <a
                     className="nav-link"
-                    href={"/signin?demo=true"}
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -267,7 +265,6 @@ function NavbarInventoolyWebsite() {
                       transition: "0.3s",
                       color: "#4154f1",
                       backgroundColor: "#fff",
-                      // padding: "10px 0 10px 0px",
                       fontSize: "1rem",
                       borderRadius: ".25rem",
                       paddingLeft: "20px",

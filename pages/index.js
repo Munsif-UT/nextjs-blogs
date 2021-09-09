@@ -39,6 +39,8 @@ import Footer from "../components/Footer";
 import BlogsForHome from "../components/BlogsForHome";
 import blogsData from "./../data/blogsData";
 import Contectus from "../components/Contectus";
+import Link from "next/link";
+import checkStatus from "../config/checkStatus";
 
 const isValidEmail = (email) => {
   const re =
@@ -51,6 +53,7 @@ const Home = ({ HomeBlogs }) => {
   const blogsDataCopy = blogsData.map((blog) => blog);
   blogsDataCopy.length = 3; //to get only first 3 values of array
   //navbar scroll when active state
+  const URL = checkStatus();
   const history = useHistory();
   // const dispatch = useDispatch();
   const [navbar, setNavbar] = useState(false);
@@ -107,7 +110,6 @@ const Home = ({ HomeBlogs }) => {
 
   //navbar scroll changeBackground function
   const changeBackground = () => {
-    // console.log(window.scrollY)
     if (window.scrollY >= 66) {
       setNavbar(true);
     } else {
@@ -128,19 +130,6 @@ const Home = ({ HomeBlogs }) => {
     // adding the event when scroll change background
     window.addEventListener("scroll", changeBackground);
   });
-  // async function fetchHomeBlogs() {
-  //   await fetch("localhost/api/blogs")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     }
-  //     );
-
-  // }
-  // useEffect(()=>{
-  //   fetchHomeBlogs()
-  // },[]);
-  // chatbot("https://embed.tawk.to/60e71436d6e7610a49aa494e/1fa3adtm9");
   return (
     <div
       className="fhomepage"
@@ -203,24 +192,23 @@ const Home = ({ HomeBlogs }) => {
                 your stock levels and provides out-of-the-box supply chain
                 management that creates a smooth, consistent cash flow.
               </h2>
-              <a
-                onClick={() => {
-                  history.push("/onboard");
-                }}
-                className="btn  btnMain"
-                style={{
-                  marginTop: "20px",
-                  lineHeight: "0",
-                  padding: "30px 50px",
-                  borderRadius: "4px",
-                  transition: "0.5s",
-                  color: "#fff ",
-                  background: "#4154f1",
-                  boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                }}
-              >
-                Get Started For Free
-              </a>
+              <Link href={`${URL}onboard`}>
+                <a
+                  className="btn  btnMain"
+                  style={{
+                    marginTop: "20px",
+                    lineHeight: "0",
+                    padding: "30px 50px",
+                    borderRadius: "4px",
+                    transition: "0.5s",
+                    color: "#fff ",
+                    background: "#4154f1",
+                    boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                  }}
+                >
+                  Get Started For Free
+                </a>
+              </Link>
             </div>
             <div className="col-lg-6 col-md-5">
               <Image
@@ -288,24 +276,23 @@ const Home = ({ HomeBlogs }) => {
                 provides you with all the insights of your business, so that you
                 never miss out on an opportunity. <p />
                 {/* <button class="btn  btn-lg btnMain">Why Inventooly?</button> */}
-                <a
-                  onClick={() => {
-                    history.push("/onboard");
-                  }}
-                  className="btn  btnMain"
-                  style={{
-                    marginTop: "20px",
-                    lineHeight: "0",
-                    padding: "30px 50px",
-                    borderRadius: "4px",
-                    transition: "0.5s",
-                    color: "#fff",
-                    background: "#4154f1",
-                    boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                  }}
-                >
-                  Get Started For Free
-                </a>
+                <Link href={`${URL}onboard`}>
+                  <a
+                    className="btn  btnMain"
+                    style={{
+                      marginTop: "20px",
+                      lineHeight: "0",
+                      padding: "30px 50px",
+                      borderRadius: "4px",
+                      transition: "0.5s",
+                      color: "#fff",
+                      background: "#4154f1",
+                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                    }}
+                  >
+                    Get Started For Free
+                  </a>
+                </Link>
               </h2>
             </div>
             <div className="col-md-6 text-center">
@@ -517,15 +504,11 @@ const Home = ({ HomeBlogs }) => {
                   <div className="content-b">
                     <h3 style={{ marginBottom: "0px;" }}>GET EARLY ACCESS </h3>
                     <p style={{ marginBottom: "0px;" }}>First 800 Users only</p>
-                    <a
-                      onClick={() => {
-                        history.push("/onboard");
-                      }}
-                      className="btn "
-                      style={{ width: "300px" }}
-                    >
-                      Get Started For Free
-                    </a>
+                    <Link href={`${URL}onboard`}>
+                      <a className="btn " style={{ width: "300px" }}>
+                        Get Started For Free
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -596,24 +579,25 @@ const Home = ({ HomeBlogs }) => {
                   to help you keep track of your inventory, even with your eyes
                   shut. Automated analysis and powerful insights make it a more
                   effective way to stay on top of your inventory. <p />
-                  <button
-                    onClick={() => {
-                      history.push("/onboard");
-                    }}
-                    className="btn btnMain"
-                    style={{
-                      marginTop: "20px",
-                      lineHeight: "0",
-                      padding: "30px 50px ",
-                      borderRadius: "4px",
-                      transition: "0.5s",
-                      color: "#fff ",
-                      background: "#4154f1",
-                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                    }}
-                  >
-                    Get Started For Free
-                  </button>
+                  <Link href={`${URL}onboard`}>
+                    <a>
+                      <button
+                        className="btn btnMain"
+                        style={{
+                          marginTop: "20px",
+                          lineHeight: "0",
+                          padding: "30px 50px ",
+                          borderRadius: "4px",
+                          transition: "0.5s",
+                          color: "#fff ",
+                          background: "#4154f1",
+                          boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                        }}
+                      >
+                        Get Started For Free
+                      </button>
+                    </a>
+                  </Link>
                 </h2>
               </div>
               <div className="col-md-6 text-center content-vertical">
@@ -660,24 +644,25 @@ const Home = ({ HomeBlogs }) => {
                   month with Inventooly’s automated re-ordering process.
                   Advanced algorithms analyze the sales forecast for thousands
                   of products in minutes. <p />
-                  <button
-                    onClick={() => {
-                      history.push("/onboard");
-                    }}
-                    className="btn btnMain"
-                    style={{
-                      marginTop: "20px",
-                      lineHeight: "0",
-                      padding: "30px 50px ",
-                      borderRadius: "4px",
-                      transition: "0.5s",
-                      color: "#fff ",
-                      background: "#4154f1 ",
-                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                    }}
-                  >
-                    Get Started For Free
-                  </button>
+                  <Link href={`${URL}onboard`}>
+                    <a>
+                      <button
+                        className="btn btnMain"
+                        style={{
+                          marginTop: "20px",
+                          lineHeight: "0",
+                          padding: "30px 50px ",
+                          borderRadius: "4px",
+                          transition: "0.5s",
+                          color: "#fff ",
+                          background: "#4154f1 ",
+                          boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                        }}
+                      >
+                        Get Started For Free
+                      </button>
+                    </a>
+                  </Link>
                 </h2>
               </div>
             </div>
@@ -718,24 +703,25 @@ const Home = ({ HomeBlogs }) => {
                   Inventooly’s one-click system sends purchase orders directly
                   to your suppliers and helps you keep track of outstanding and
                   completed POs. <p />
-                  <button
-                    onClick={() => {
-                      history.push("/onboard");
-                    }}
-                    className="btn btnMain"
-                    style={{
-                      marginTop: "20px",
-                      lineHeight: "0",
-                      padding: "30px 50px ",
-                      borderRadius: "4px",
-                      transition: "0.5s",
-                      color: "#fff ",
-                      background: "#4154f1 ",
-                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                    }}
-                  >
-                    Get Started For Free
-                  </button>
+                  <Link href={`${URL}onboard`}>
+                    <a>
+                      <button
+                        className="btn btnMain"
+                        style={{
+                          marginTop: "20px",
+                          lineHeight: "0",
+                          padding: "30px 50px ",
+                          borderRadius: "4px",
+                          transition: "0.5s",
+                          color: "#fff ",
+                          background: "#4154f1 ",
+                          boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                        }}
+                      >
+                        Get Started For Free
+                      </button>
+                    </a>
+                  </Link>
                 </h2>
               </div>
               <div className="col-md-6 text-center content-vertical">
@@ -782,24 +768,25 @@ const Home = ({ HomeBlogs }) => {
                   headache. Inventooly lets you combine insights from each
                   channel in one central dashboard so you can reorder products
                   based on their overall performance. <p />
-                  <button
-                    onClick={() => {
-                      history.push("/onboard");
-                    }}
-                    className="btn btnMain"
-                    style={{
-                      marginTop: "20px",
-                      lineHeight: "0",
-                      padding: "30px 50px ",
-                      borderRadius: "4px",
-                      transition: "0.5s",
-                      color: "#fff ",
-                      background: "#4154f1",
-                      boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
-                    }}
-                  >
-                    Get Started For Free
-                  </button>
+                  <Link href={`${URL}onboard`}>
+                    <a>
+                      <button
+                        className="btn btnMain"
+                        style={{
+                          marginTop: "20px",
+                          lineHeight: "0",
+                          padding: "30px 50px ",
+                          borderRadius: "4px",
+                          transition: "0.5s",
+                          color: "#fff ",
+                          background: "#4154f1",
+                          boxShadow: "0px 5px 30px rgb(65 84 241 / 40%)",
+                        }}
+                      >
+                        Get Started For Free
+                      </button>
+                    </a>
+                  </Link>
                 </h2>
               </div>
             </div>
@@ -814,15 +801,11 @@ const Home = ({ HomeBlogs }) => {
                   <div className="content-b">
                     <h3 style={{ marginBottom: "0px;" }}>GET EARLY ACCESS </h3>
                     <p style={{ marginBottom: "0px;" }}>First 800 Users only</p>
-                    <a
-                      onClick={() => {
-                        history.push("/onboard");
-                      }}
-                      className="btn "
-                      style={{ width: "300px" }}
-                    >
-                      Get Started For Free
-                    </a>
+                    <Link href={`${URL}onboard`}>
+                      <a className="btn " style={{ width: "300px" }}>
+                        Get Started For Free
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -1089,25 +1072,20 @@ const Home = ({ HomeBlogs }) => {
     </div>
   );
 };
-// export async function (context) => {
-//   const res = await fetch(`http://localhost:3000/api/getblogs/${query.id}`, {
-//     method: "GET",
-//   });
-//   const { data } = await res.json();
-//   console.log(data);
-//   return { blogsData: data };
-// };
-
-// export default BlogDetail;
-
 export default Home;
 export async function getServerSideProps() {
   // const { data } = await axios.get("/getblogs");
-  const res = await fetch("http://localhost:3000/api/getblogs", {
-    method: "GET",
-  });
+  const res = await fetch(
+    `${
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/api/getblogs"
+        : "https://app.inventooly.com/api/getblogs"
+    }`,
+    {
+      method: "GET",
+    }
+  );
   const data = await res.json();
-  console.log(data.allblogs);
   return {
     props: {
       HomeBlogs: data.allblogs,

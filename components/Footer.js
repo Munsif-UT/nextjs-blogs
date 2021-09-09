@@ -99,7 +99,7 @@ function Footer() {
                       transition: "0.3s",
                       borderRadius: "4px",
                     }}
-                    onClick={sendEmail()}
+                    // onClick={sendEmail()}
                   />
                 </form>
               </div>

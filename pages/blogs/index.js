@@ -19,7 +19,7 @@ import Contectus from "../../components/Contectus";
 function blogs({ Blogs }) {
   console.log(Blogs);
   return (
-    <div className="blogsCont" style={{fontFamily: "Nunito, sans-serif",}}>
+    <div className="blogsCont" style={{ fontFamily: "Nunito, sans-serif" }}>
       <Head>
         <title>Inventooly Blog</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -58,7 +58,7 @@ function blogs({ Blogs }) {
           </Box>
         </div>
       </section>
-      <Contectus/>
+      <Contectus />
       <Footer />
     </div>
   );
@@ -67,9 +67,16 @@ function blogs({ Blogs }) {
 export default blogs;
 export async function getServerSideProps() {
   // const { data } = await axios.get("/getblogs");
-  const res = await fetch("http://localhost:3000/api/getblogs", {
-    method: "GET",
-  });
+  const res = await fetch(
+    `${
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/api/getblogs"
+        : "https://app.inventooly.com/api/getblogs"
+    }`,
+    {
+      method: "GET",
+    }
+  );
   const data = await res.json();
   console.log(data.allblogs);
   if (!data) {

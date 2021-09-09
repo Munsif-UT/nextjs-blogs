@@ -15,7 +15,6 @@ function Blog({
   imagetitle,
   createdAT,
 }) {
-  console.log(blogDesc.length);
   return (
     <div className="col-md-4 col-sm-6">
       <article className="article">

@@ -37,22 +37,39 @@ function Signin() {
     loginUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const isValidEmail = (email) => {
+    const re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+  console.log(isValidEmail(email));
   const submitData = async () => {
-    const { data } = await axiosNext(
-      async () =>
-        await axios.post("/login", {
-          email,
-          password: pass,
-        }),
-      localStorage
-    );
-    localStorage.setItem("authToken", data.token);
-    axios.defaults.headers.common = {
-      Authorization: `bearer ${data.token}`,
-    };
-    if (data.token) {
-      router.push("/blogs/editblogs");
+    if (isValidEmail(email)) {
+      if (!email || !pass) {
+        alert("Email or password is required!");
+      } else {
+        try {
+          const { data } = await axiosNext(
+            async () =>
+              await axios.post("/login", {
+                email,
+                password: pass,
+              }),
+            localStorage
+          );
+          localStorage.setItem("authToken", data.token);
+          axios.defaults.headers.common = {
+            Authorization: `bearer ${data.token}`,
+          };
+          if (data.token) {
+            router.push("/blogs/editblogs");
+          }
+        } catch (error) {
+          alert("Invalid email or password!");
+        }
+      }
+    } else {
+      alert("Email is invalid");
     }
   };
   return (
@@ -79,16 +96,17 @@ function Signin() {
                     padding: "5px 19px",
                     background: "white",
                     outline: "none",
-                    color: "black",
+                    color: "white",
                     borderRadius: "4px",
                     fontSize: "18px",
                     letterSpacing: "1px",
                     transition: "1s",
-                    border: "2px solid white",
+                    border: "2px solid #4154f1",
                     marginBottom: "20px",
                     boxShadow: "rgb(65 84 241 / 40%) 0px 5px 30px",
                     fontFamily: "Nunito, sans-serif",
                     textDecoration: "none",
+                    background: "#4154f1",
                   }}
                 >
                   Home

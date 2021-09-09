@@ -508,6 +508,28 @@ a {
   color: #012970;
   font-weight: 700;
 }
+.h1Column {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #071486;
+  line-height: 1.5;
+}
+.h2Column {
+  color: #57646b;
+  margin: 15px 0 0;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.btnMainFeatures {
+  margin-top: 20px;
+  padding: 10px 50px !important;
+  border-radius: 4px;
+  transition: 0.5s;
+  color: #fff !important;
+  background: #4154f1 !important;
+  box-shadow: 0 5px 30px rgb(65 84 241 / 40%);
+}
 @media screen and (max-width: 992px) {
   .blogeditorBtn {
     margin-left: 62%;
