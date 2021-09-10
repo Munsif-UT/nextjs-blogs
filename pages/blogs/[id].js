@@ -22,9 +22,9 @@ function BlogDetail({ blogsData }) {
       ) : (
         <>
           <Head>
-            <title>{blogsData.metaTitle}</title>
-            <meta name="description" content={blogsData.metaDescription} />
-            <meta name="keywords" content={blogsData.metaKeywords} />
+            <title>{blogsData?.metaTitle}</title>
+            <meta name="description" content={blogsData?.metaDescription} />
+            <meta name="keywords" content={blogsData?.metaKeywords} />
           </Head>
           <div
             className="blog-detail"
@@ -44,14 +44,14 @@ function BlogDetail({ blogsData }) {
                   <div className="row d-flex justify-content-center ">
                     {
                       <BlogDetails
-                        key={blogsData._id}
-                        title={blogsData.blogTitle}
-                        userName={blogsData.blogAutherName}
-                        blogDescription={blogsData.blogDesc}
-                        image={blogsData.blogImage}
-                        imageAlt={blogsData.images.imageAlt}
-                        imageTitle={blogsData.images.imageTitle}
-                        createdAT={blogsData.createdAt}
+                        key={blogsData?._id}
+                        title={blogsData?.blogTitle}
+                        userName={blogsData?.blogAutherName}
+                        blogDescription={blogsData?.blogDesc}
+                        image={blogsData?.blogImage}
+                        imageAlt={blogsData?.images.imageAlt}
+                        imageTitle={blogsData?.images.imageTitle}
+                        createdAT={blogsData?.createdAt}
                       />
                     }
                   </div>
