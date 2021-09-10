@@ -489,7 +489,7 @@ function TermsOfServices() {
                       }}
                     >
                       490 Wheeler Road Suite#220, <br />
-                      Hauppauge New York, NY 535022 US.
+                      Hauppauge New York, NY, 11788 US.
                     </p>
                   </div>
                 </div>
