@@ -19,7 +19,7 @@ RUN npm run build
 
 # .next permissions
 RUN chmod -R 777 .next
-
+ENV NODE_ENV production
 # Expose the listening port
 EXPOSE 3000
 

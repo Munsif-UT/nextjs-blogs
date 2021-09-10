@@ -171,7 +171,7 @@ function NavbarInventoolyWebsite() {
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <Link href="/blogs">
+                <Link href={`${URL}blogs`}>
                   <a
                     className="nav-link"
                     style={{
@@ -187,7 +187,7 @@ function NavbarInventoolyWebsite() {
                       transition: "0.3s",
                     }}
                   >
-                    Blogs
+                    Blog
                   </a>
                 </Link>
               </li>
