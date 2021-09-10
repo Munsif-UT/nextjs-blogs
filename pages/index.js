@@ -39,6 +39,7 @@ import Footer from "../components/Footer";
 import BlogsForHome from "../components/BlogsForHome";
 import blogsData from "./../data/blogsData";
 import Contectus from "../components/Contectus";
+import axiosNext from "../components/axios";
 import Link from "next/link";
 import checkStatus from "../config/checkStatus";
 
@@ -47,11 +48,12 @@ const isValidEmail = (email) => {
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 };
-const Home = ({ HomeBlogs }) => {
-  const [HomeBlogsState, setHomeBlogsState] = useState(HomeBlogs);
-  const homeBlogsCopy = HomeBlogsState.slice(0, 3);
-  const blogsDataCopy = blogsData.map((blog) => blog);
-  blogsDataCopy.length = 3; //to get only first 3 values of array
+const Home = (props) => {
+  const [homeBlogs, setHomeBlogs] = useState([]);
+  // const [HomeBlogsState, setHomeBlogsState] = useState(HomeBlogs);
+  // const homeBlogsCopy = HomeBlogsState.slice(0, 3);
+  // const blogsDataCopy = blogsData.map((blog) => blog);
+  // blogsDataCopy.length = 3; //to get only first 3 values of array
   //navbar scroll when active state
   const URL = checkStatus();
   const history = useHistory();
@@ -95,6 +97,22 @@ const Home = ({ HomeBlogs }) => {
       // dispatch(onContactForm(data));
     }
   };
+
+  const fetchBlogs = async () => {
+    try {
+      let data = await axiosNext(
+        async (ax) => await ax.get("/getblogs"),
+        window.localStorage
+      );
+      setHomeBlogs(data?.data?.allblogs?.slice(0, 3));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchBlogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // useEffect(() => {
   //   if (doneContactForm) {
@@ -1053,7 +1071,7 @@ const Home = ({ HomeBlogs }) => {
           </div>
           <div className="container">
             <div className="row rowHeight">
-              {homeBlogsCopy.map((blog) => (
+              {homeBlogs.map((blog) => (
                 <BlogsForHome
                   key={blog._id}
                   date={blog.createdAt}
@@ -1073,22 +1091,12 @@ const Home = ({ HomeBlogs }) => {
   );
 };
 export default Home;
-export async function getServerSideProps() {
-  // const { data } = await axios.get("/getblogs");
-  const res = await fetch(
-    `${
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/api/getblogs"
-        : "https://app.inventooly.com/api/getblogs"
-    }`,
-    {
-      method: "GET",
-    }
-  );
-  const data = await res.json();
-  return {
-    props: {
-      HomeBlogs: data.allblogs,
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   console.log("getServerSideProps", process.env);
+
+//   return {
+//     props: {
+//       process: process,
+//     },
+//   };
+// }

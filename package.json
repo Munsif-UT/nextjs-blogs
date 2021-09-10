@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=development node server.js",
-    "dev-win": "set NODE_ENV=development node server.js",
+    "dev-win": "set NODE_ENV=development && node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
+    "start-win": "set NODE_ENV=production && node server.js",
     "lint": "next lint"
   },
   "dependencies": {
