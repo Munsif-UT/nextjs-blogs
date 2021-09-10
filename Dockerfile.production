@@ -17,6 +17,9 @@ COPY ./ ./
 # Build app
 RUN npm run build
 
+# .next permissions
+RUN chmod -R 777 .next
+
 # Expose the listening port
 EXPOSE 3000
 
