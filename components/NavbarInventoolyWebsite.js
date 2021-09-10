@@ -171,7 +171,7 @@ function NavbarInventoolyWebsite() {
                 className="nav-item li-Nav"
                 style={{ padding: "0 15px 0 15px" }}
               >
-                <Link href={`${URL}blogs`}>
+                <Link href={`/blogs`}>
                   <a
                     className="nav-link"
                     style={{
