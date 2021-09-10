@@ -23,7 +23,7 @@ function BlogDetails({
             title={imageTitle}
             className="img-fluid"
             width={1024}
-            height={778}
+            height={400}
           />
         </div>
         <h2

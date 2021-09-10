@@ -52,12 +52,12 @@ function NavbarInventoolyWebsite() {
             }}
           >
             <Image
-              style={{ marginRight: "6px", marginTop: "15px", padding: "10px" }}
+              style={{ marginRight: "6px", padding: "10px", top: '9px important;' }}
               src="/frontend/media/logo_final-svg.png"
               alt=""
               width={30}
               height={30}
-              className="d-inline-block align-text-top"
+              // className="d-inline-block align-text-top"
             />
             <span style={{ marginLeft: "6px" }}>Inventooly</span>
           </a>
