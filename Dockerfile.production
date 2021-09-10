@@ -1,5 +1,5 @@
 # Base on offical Node.js Alpine image
-FROM node:14
+FROM node:alpine
 
 # Set working directory
 WORKDIR /usr/app
@@ -9,13 +9,13 @@ WORKDIR /usr/app
 COPY ./package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN yarn
 
 # Copy all files
 COPY ./ ./
 
 # Build app
-RUN npm run build
+RUN yarn build
 
 # Expose the listening port
 EXPOSE 3000
@@ -25,4 +25,4 @@ EXPOSE 3000
 USER node
 
 # Run npm start script when container starts
-CMD [ "npm", "start" ]
+CMD [ "yarn", "start" ]
