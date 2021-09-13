@@ -68,7 +68,7 @@ function AllblogsEd({
             </div>
             <div className="editBlog">
               <Link
-                href={`/blogs/editblogs/${blogNo}/Edit`}
+                href={`/blogs/editblogs/${blogNo}/edit`}
                 // as={`/blogs/editblogs/${blogNo}/Edit`}
               >
                 <a>

@@ -35,7 +35,6 @@ function Avatar() {
         window.localStorage
       );
       let loggedin = data.status === 401;
-      console.log(data);
       setLoggedIn(loggedin);
       // if (loggedin) {
       //   router.push("/blogs/editblogs");
@@ -62,7 +61,7 @@ function Avatar() {
     formData.append("ckEditorValue", values.ckEditorValue);
     formData.append("blogImage", image);
     const { data } = await axiosNext(
-      async () => await axios.post("/fetchblogs", formData),
+      async (ax) => await ax.post("/fetchblogs", formData),
       window.localStorage
     );
     if (data.success) {

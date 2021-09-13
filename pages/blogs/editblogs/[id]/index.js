@@ -124,7 +124,7 @@ function EditSpecificBlog({ blogDetail }) {
                     }}
                   >
                     <div className="editBlog">
-                      <Link href={`/blogs/editblogs/${blogDetail._id}/Edit`}>
+                      <Link href={`/blogs/editblogs/${blogDetail._id}/edit`}>
                         <a>
                           <button
                             className="btn"
