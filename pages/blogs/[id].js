@@ -78,7 +78,7 @@ BlogDetail.getInitialProps = async (context) => {
     `${
       process.env.NODE_ENV === "development"
         ? `http://localhost:3000/api/getblogs/${query.id}`
-        : `https://devapi.inventooly.com/api/getblogs/${query.id}`
+        : `https://development.inventooly.com/api/getblogs/${query.id}`
     }`,
     {
       method: "GET",

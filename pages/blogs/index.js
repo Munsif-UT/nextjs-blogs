@@ -71,7 +71,7 @@ export async function getServerSideProps() {
     `${
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/getblogs"
-        : "https://devapi.inventooly.com/api/getblogs"
+        : "https://development.inventooly.com/api/getblogs"
     }`,
     {
       method: "GET",
