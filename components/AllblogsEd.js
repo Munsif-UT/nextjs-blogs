@@ -104,7 +104,7 @@ function AllblogsEd({
             className="article_title"
             style={{ minHeight: "100px", height: "100%" }}
           >
-            <Link href={`/blogs/${blogNo}`}>
+            <Link href={`/blogs/editblogs/${blogNo}`}>
               <a className="commonLinkStyle">{title && title.slice(0, 100)}</a>
             </Link>
           </h2>
